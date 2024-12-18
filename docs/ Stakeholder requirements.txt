@@ -1,0 +1,73 @@
+                                    Stakeholder requirements
+                                     exam-security-project
+  
+Client side
+
+GUI Requirements
+    • The GUI will be implemented using Qt.
+Session Management:
+    • Include a button to start or end sessions. The button’s label shall update based on session status.
+    • Disable temperature and relay controls until a session is active.
+Temperature and Relay Controls:
+    • A button to request and display the temperature from the ESP32.
+    • A button to toggle the relay connected to pin 32.
+Logging and Status Control:
+    • Provide a button to clear logs.
+    • Display logs, temperature, relay state, and other program details in a read-only area.
+Serial Port Configuration:
+    • Include a menu to list and allow users to select the serial port.
+
+      
+Communication requirement for communication.py
+
+Serial Protocol Communication
+    • The client and server shall communicate using a serial protocol with the ESP32.
+Request-Response Mechanism
+    • The client shall send requests and process responses efficiently.
+    • The server must respond promptly.
+    • Server responses, such as temperature data and relay state, shall be displayed in the GUI.
+Session Management
+    • The client shall support establishing and closing sessions.
+    • Sessions will expire after 1 minute of inactivity.
+Error Handling
+    • Handle errors such as failed connections or no server response.
+    • Notify users of any communication issues via the GUI.
+Serial Configuration
+    • Allow users to select and configure the serial port and baud rate.
+Logging and Debugging
+    • Use the server LED on pin 21 for debugging during development.
+    • Display relay state, temperature readings, and program details in a read-only log area.
+
+
+Security requirements for security.py
+
+Secure Communication
+    • All communication between the client and server shall be encrypted using AES-256.
+    • Encryption keys and initialization vectors (IVs) shall be securely shared using RSA-2048.
+Data Integrity
+    • HMAC-SHA256 shall be used to ensure the integrity of all messages sent between the client and server.
+    • The client shall verify the HMAC signature of responses received from the server.
+Shared Secret Management
+    • A shared secret key shall be used for HMAC operations.
+    • The client shall securely store and use this key for signing and verifying messages.
+Session Security
+    • The client shall generate and exchange AES-256 session keys with the server at the start of communication.
+    • Session keys shall only be valid for the duration of the session.
+Secure Key Storage
+    • The client shall ensure encryption keys, secrets, and initialization vectors (IVs) are not exposed in plain text.
+    • Any sensitive security data (e.g., keys or secrets) shall be stored in memory securely.
+Security Event Logging
+    • Log all security-related events, such as:
+        ◦ Encryption and decryption operations.
+        ◦ HMAC verification failures.
+        ◦ Key exchange successes or failures.
+    • Display critical security notifications in the GUI (e.g., HMAC verification failure or encryption errors).
+Error Handling
+    • Handle errors related to encryption, decryption, and key exchanges, such as:
+        ◦ Invalid HMAC signatures.
+        ◦ Failed encryption or decryption operations.
+    • Notify the user of critical security issues via the GUI.
+
+
+Server side
+Session management for session.py

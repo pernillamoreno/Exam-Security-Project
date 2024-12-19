@@ -39,7 +39,7 @@ Logging and Debugging
     • Display relay state, temperature readings, and program details in a read-only log area.
 
 
-Security requirements for security.py
+Security requirements for session.py
 
 Secure Communication
     • All communication between the client and server shall be encrypted using AES-256.

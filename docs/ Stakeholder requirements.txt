@@ -145,7 +145,7 @@ Logging and Debugging
     Communication Logs
         Maintain logs of all incoming and outgoing requests, including their success or failure.
 
-Error and Exception Handling
+Error Handling
 
     Session Management
         Ensure that only one session is active at a time.

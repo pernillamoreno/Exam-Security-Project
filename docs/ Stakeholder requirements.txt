@@ -1,6 +1,3 @@
-                                    WORK IN PROGRESS!!
-
-
                                  Stakeholder requirements
                                   exam-security-project
   
@@ -21,7 +18,7 @@ Serial Port Configuration:
     • Include a menu to list and allow users to select the serial port.
 
       
-Communication requirement for communication.py
+Communication requirement 
 
 Serial Protocol Communication
     • The client and server shall communicate using a serial protocol with the ESP32.
@@ -42,7 +39,7 @@ Logging and Debugging
     • Display relay state, temperature readings, and program details in a read-only log area.
 
 
-Security requirements for session.py
+Security requirements 
 
 Secure Communication
     • All communication between the client and server shall be encrypted using AES-256.
@@ -58,13 +55,13 @@ Session Security
     • Session keys shall only be valid for the duration of the session.
 Secure Key Storage
     • The client shall ensure encryption keys, secrets, and initialization vectors (IVs) are not exposed in plain text.
-    • Any sensitive security data (e.g., keys or secrets) shall be stored in memory securely.
+    • Any sensitive security data (for example, keys or secrets) shall be stored in memory securely.
 Security Event Logging
     • Log all security-related events, such as:
         ◦ Encryption and decryption operations.
         ◦ HMAC verification failures.
         ◦ Key exchange successes or failures.
-    • Display critical security notifications in the GUI (e.g., HMAC verification failure or encryption errors).
+    • Display critical security notifications in the GUI for example, HMAC verification failure or encryption errors.
 Error Handling
     • Handle errors related to encryption, decryption, and key exchanges, such as:
         ◦ Invalid HMAC signatures.
@@ -72,5 +69,87 @@ Error Handling
     • Notify the user of critical security issues via the GUI.
 
 
+
+
 Server side
-Session management for session.py
+
+Server Stakeholder Requirements
+General Requirements
+
+    Hardware Integration
+        Use an ESP32 as the hardware platform for server implementation.
+        Control an LED connected to pin 21 for status indication and debugging purposes.
+        Toggle a relay connected to pin 32 based on client requests.
+    Session Management
+        Support establishing, maintaining, and terminating a single session at a time.
+        Automatically terminate sessions after 1 minute of inactivity.
+
+Communication Requirements
+
+    Serial Communication
+        Communicate with the client over a serial connection.
+        Implement a request-response protocol to handle incoming client requests and provide appropriate responses.
+        Send responses promptly, including:
+            Temperature readings.
+            Relay state changes.
+        Support client-side serial port configuration by handling various baud rates.
+
+    Error Handling
+        Handle and log communication errors, such as:
+            Failed serial communication.
+            Invalid or unrecognized requests.
+        Provide status feedback to the client through LED indications and logs.
+
+Temperature and Relay Controls
+
+    Temperature Management
+        Measure and provide temperature data from the ESP32 sensor.
+        Send temperature readings to the client upon request.
+    Relay Management
+        Control a relay connected to pin 32.
+        Update and communicate the relay state (on/off) to the client.
+
+Security Requirements
+
+    Secure Communication
+        Encrypt all communication with the client using AES-256.
+        Perform key exchanges using RSA-2048 for secure AES-256 session keys and initialization vectors (IVs).
+
+    Data Integrity
+        Use HMAC-SHA256 for all messages to ensure data integrity.
+        Verify the HMAC signatures of incoming client requests and reject tampered data.
+
+    Shared Secret Management
+        Use the shared secret key (Fj2;wu3Ur=ARl2Tq6luKM3nGj8z1+) for HMAC operations.
+        Ensure the secret key is securely stored and never exposed in plain text.
+
+    Key Exchange
+        Generate and exchange AES-256 keys and initialization vectors (IVs) with the client at the start of the session.
+        Ensure secure and error-free key exchange using RSA-2048.
+
+    Error Handling
+        Handle encryption and decryption errors, including:
+            Invalid HMAC signatures.
+            Failed key exchanges or encryption operations.
+        Notify the client of critical security issues through the protocol.
+
+Logging and Debugging
+
+    Debugging Tools
+        Use the LED on pin 21 for debugging purposes, such as:
+            Indicating server status for example, active session, communication errors.
+        Log all security-related events, including:
+            HMAC verification failures.
+            Key exchange successes or failures.
+            Encryption and decryption operations.
+    Communication Logs
+        Maintain logs of all incoming and outgoing requests, including their success or failure.
+
+Error and Exception Handling
+
+    Session Management
+        Ensure that only one session is active at a time.
+        Handle cases where a client fails to terminate a session properly example timeout.
+    Communication Errors
+        Log and handle any failed requests due to serial or protocol errors.
+        Provide meaningful status information to assist in debugging.

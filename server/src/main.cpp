@@ -1,18 +1,19 @@
+/*just for test */
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
-
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+void setup()
+{
+  // Initialize GPIO21 as an output
+  pinMode(21, OUTPUT);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
+void loop()
+{
+  // Turn the LED on
+  digitalWrite(21, HIGH);
+  delay(1000); // Wait for 1 second
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  // Turn the LED off
+  digitalWrite(21, LOW);
+  delay(1000); // Wait for 1 second
 }

@@ -1,7 +1,13 @@
+"""
+    Client gui
+"""
+    
+
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
 )
 import sys
+from session import Session #import Session class from session.py
 
 
 class ClientGui(QMainWindow):

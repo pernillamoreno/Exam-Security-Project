@@ -62,7 +62,7 @@ class ClientGui(QMainWindow):
         self.log_area.append("Establish Session: Done")
 
     def get_temperature(self):
-        self.log_area.append("Temperature: 42.78 °C")
+        self.log_area.append("Temperature: Here is my temp")
 
     def toggle_relay(self):
         current_state = "On" if "Off" in self.log_area.toPlainText() else "Off"

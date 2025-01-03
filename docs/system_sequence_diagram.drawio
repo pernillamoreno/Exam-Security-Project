@@ -1,136 +1,141 @@
 <mxfile host="65bd71144e">
     <diagram id="hEeOqorTtUtQZ6ahrq-n" name="Page-1">
-        <mxGraphModel dx="1826" dy="953" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1571" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="95" style="edgeStyle=none;html=1;dashed=1;" edge="1" parent="1" source="32">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="215" y="880" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="32" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;User interface&lt;br&gt;&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="140" y="19" width="150" height="681" as="geometry"/>
+                    <mxGeometry x="142" y="19" width="150" height="841" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;Session&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="357" y="19" width="150" height="891" as="geometry"/>
+                    <mxGeometry x="405" y="19" width="151" height="891" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="Create Session" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="33" source="32">
+                <mxCell id="80" value="Create Session" style="html=1;verticalAlign=bottom;endArrow=block;" parent="33" source="32" edge="1">
                     <mxGeometry width="80" relative="1" as="geometry">
                         <mxPoint x="-117" y="111" as="sourcePoint"/>
                         <mxPoint x="77.5" y="111" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="34" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;MbedTLS&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="570" y="19" width="150" height="901" as="geometry"/>
-                </mxCell>
-                <mxCell id="81" value="Create connection" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="34" target="35">
-                    <mxGeometry x="0.0283" y="10" width="80" relative="1" as="geometry">
-                        <mxPoint x="-140" y="141" as="sourcePoint"/>
-                        <mxPoint x="54.5" y="141" as="targetPoint"/>
+                <mxCell id="90" value="Terminate Client" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="33" edge="1" source="33">
+                    <mxGeometry x="-0.04" y="-10" relative="1" as="geometry">
+                        <mxPoint x="40.75" y="280" as="sourcePoint"/>
+                        <mxPoint x="-185" y="291" as="targetPoint"/>
+                        <Array as="points"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="84" value="Connection fails" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="34">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="289.69000000000005" y="251" as="sourcePoint"/>
-                        <mxPoint x="-139.99965517241395" y="251" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="78.19000000000005" y="251"/>
-                        </Array>
-                    </mxGeometry>
+                <mxCell id="34" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;MbedTLS&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
+                    <mxGeometry x="672" y="19" width="150" height="901" as="geometry"/>
                 </mxCell>
-                <mxCell id="86" value="HSECRET" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="34" source="34">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="70" y="431" as="sourcePoint"/>
-                        <mxPoint x="-139.84965517241392" y="430.9999999999999" as="targetPoint"/>
-                        <Array as="points"/>
+                <mxCell id="84" value="Connection failed" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="34" edge="1" source="36">
+                    <mxGeometry x="-0.0038" y="-8" relative="1" as="geometry">
+                        <mxPoint x="525" y="279" as="sourcePoint"/>
+                        <mxPoint x="-192.25" y="279" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="78.19000000000005" y="279"/>
+                        </Array>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="35" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;Communication&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="787" y="19" width="150" height="911" as="geometry"/>
+                    <mxGeometry x="915" y="19" width="150" height="911" as="geometry"/>
+                </mxCell>
+                <mxCell id="134" value="Establish connection" style="html=1;verticalAlign=bottom;endArrow=block;exitX=0.518;exitY=0.142;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="35" target="36">
+                    <mxGeometry x="0.0255" y="10" width="80" relative="1" as="geometry">
+                        <mxPoint x="-433.00199999999995" y="229.00199999999995" as="sourcePoint"/>
+                        <mxPoint x="284.5999999999999" y="232.26" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="36" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Communication&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1000" y="19" width="150" height="901" as="geometry"/>
+                    <mxGeometry x="1159" y="19" width="150" height="901" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;MbedTLS&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1220" y="19" width="150" height="911" as="geometry"/>
-                </mxCell>
-                <mxCell id="38" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Session&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1440" y="19" width="150" height="911" as="geometry"/>
+                    <mxGeometry x="1417" y="18" width="150" height="911" as="geometry"/>
                 </mxCell>
                 <mxCell id="39" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Application&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1660" y="19" width="150" height="931" as="geometry"/>
+                    <mxGeometry x="1889" y="19" width="150" height="931" as="geometry"/>
                 </mxCell>
-                <mxCell id="94" style="edgeStyle=none;html=1;dashed=1;" edge="1" parent="1" source="47">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="20" y="840" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="47" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=14;" parent="1" vertex="1">
-                    <mxGeometry x="5" y="22" width="30" height="47" as="geometry"/>
-                </mxCell>
-                <mxCell id="77" value="Start" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
+                <mxCell id="77" value="Start" style="html=1;verticalAlign=bottom;endArrow=block;" parent="1" edge="1">
                     <mxGeometry width="80" relative="1" as="geometry">
                         <mxPoint x="20" y="120" as="sourcePoint"/>
-                        <mxPoint x="214.5" y="120" as="targetPoint"/>
+                        <mxPoint x="210" y="120" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="78" value="SHA" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" source="33">
-                    <mxGeometry width="80" relative="1" as="geometry">
-                        <mxPoint x="440" y="409" as="sourcePoint"/>
-                        <mxPoint x="644.5" y="409" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="79" value="Establish connection" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1" target="35">
-                    <mxGeometry width="80" relative="1" as="geometry">
-                        <mxPoint x="430" y="230" as="sourcePoint"/>
-                        <mxPoint x="624.5" y="230" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="83" value="Communication created" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1" source="35" target="33">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="750" y="190" as="sourcePoint"/>
-                        <mxPoint x="550" y="200" as="targetPoint"/>
+                <mxCell id="83" value="Communication created" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" source="36" target="33" edge="1">
+                    <mxGeometry x="-0.0281" y="-7" relative="1" as="geometry">
+                        <mxPoint x="1166.4999999999995" y="197" as="sourcePoint"/>
+                        <mxPoint x="490.25" y="197" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="650" y="190"/>
+                            <mxPoint x="650" y="197"/>
                         </Array>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="85" value="Connected" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="861.69" y="343" as="sourcePoint"/>
-                        <mxPoint x="432.0003448275861" y="343" as="targetPoint"/>
+                <mxCell id="85" value="Connected" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1" target="33" source="36">
+                    <mxGeometry x="0.0369" y="-8" relative="1" as="geometry">
+                        <mxPoint x="1207" y="348" as="sourcePoint"/>
+                        <mxPoint x="486.75" y="348" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="650.19" y="343"/>
+                            <mxPoint x="655.19" y="348"/>
                         </Array>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="87" value="Generated clientRSA" style="html=1;verticalAlign=bottom;endArrow=block;" edge="1" parent="1">
-                    <mxGeometry width="80" relative="1" as="geometry">
-                        <mxPoint x="433.81034482758605" y="510" as="sourcePoint"/>
-                        <mxPoint x="646.5" y="510" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="89" value="ClientRSA" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
+                <mxCell id="92" value="Terminated" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="645.5" y="550.9999999999999" as="sourcePoint"/>
-                        <mxPoint x="431.1503448275862" y="550.9999999999999" as="targetPoint"/>
+                        <mxPoint x="216.3499999999999" y="338.15999999999985" as="sourcePoint"/>
+                        <mxPoint x="20" y="339" as="targetPoint"/>
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="90" value="Terminate Client" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1" target="32">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="434.3499999999998" y="299.1599999999999" as="sourcePoint"/>
-                        <mxPoint x="220.0003448275862" y="299.1599999999999" as="targetPoint"/>
+                <mxCell id="96" value="" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;size=50;" vertex="1" parent="1">
+                    <mxGeometry x="4" y="19" width="30" height="851" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;1 Client generates a temporary RSA key pair.&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;exitX=0.53;exitY=0.479;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="33" target="34">
+                    <mxGeometry x="0.012" y="19" width="160" relative="1" as="geometry">
+                        <mxPoint x="431" y="444" as="sourcePoint"/>
+                        <mxPoint x="724.5" y="444" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="128" value="" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;exitX=0.53;exitY=0.511;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="34" target="37">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="740" y="480" as="sourcePoint"/>
+                        <mxPoint x="1370" y="479" as="targetPoint"/>
                         <Array as="points"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="92" value="Terminated" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" edge="1" parent="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="216.3499999999999" y="309.15999999999985" as="sourcePoint"/>
-                        <mxPoint x="20" y="310" as="targetPoint"/>
-                        <Array as="points"/>
+                <mxCell id="132" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;2 Send&amp;nbsp;public key + HMAC to the server.&lt;/b&gt;&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1010" y="449" width="270" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" value="Create connection" style="html=1;verticalAlign=bottom;endArrow=block;exitX=0.518;exitY=0.142;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" target="36" edge="1">
+                    <mxGeometry x="-0.0066" y="8" width="80" relative="1" as="geometry">
+                        <mxPoint x="484.2180000000001" y="147.52199999999993" as="sourcePoint"/>
+                        <mxPoint x="1200.5" y="147.52199999999993" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="136" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Session&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" vertex="1" parent="1">
+                    <mxGeometry x="1678" y="19" width="150" height="931" as="geometry"/>
+                </mxCell>
+                <mxCell id="138" value="&lt;b&gt;3 Validate HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="1">
+                    <mxGeometry x="-0.0786" y="10" width="160" relative="1" as="geometry">
+                        <mxPoint x="1233.25" y="536.5" as="sourcePoint"/>
+                        <mxPoint x="1490.4999999999995" y="536.5" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="141" value="&lt;b&gt;4 Generate server key pair and &lt;br&gt;send server public key&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;exitX=0.524;exitY=0.632;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="37" target="136">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="1500" y="590" as="sourcePoint"/>
+                        <mxPoint x="1650" y="580" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" value="&lt;b&gt;5 Encrypt session key using server public key + HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;exitX=0.52;exitY=0.711;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="34" target="136">
+                    <mxGeometry width="160" relative="1" as="geometry">
+                        <mxPoint x="755" y="650" as="sourcePoint"/>
+                        <mxPoint x="915" y="650" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
             </root>

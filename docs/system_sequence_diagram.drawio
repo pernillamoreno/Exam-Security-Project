@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="hEeOqorTtUtQZ6ahrq-n" name="Page-1">
-        <mxGraphModel dx="2620" dy="901" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2484" dy="948" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -8,7 +8,7 @@
                     <mxGeometry x="142" y="19" width="150" height="1431" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;Session&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="405" y="19" width="151" height="1281" as="geometry"/>
+                    <mxGeometry x="410" y="19" width="151" height="1571" as="geometry"/>
                 </mxCell>
                 <mxCell id="80" value="Create Session" style="html=1;verticalAlign=bottom;endArrow=block;" parent="33" source="32" edge="1">
                     <mxGeometry width="80" relative="1" as="geometry">
@@ -24,28 +24,29 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="148" value="&lt;b&gt;9 Validate acknowledgment + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=open;startFill=0;strokeColor=#545B64;rounded=0;fontSize=12;" edge="1" parent="33">
-                    <mxGeometry x="0.0196" y="19" width="100" relative="1" as="geometry">
-                        <mxPoint x="75" y="870" as="sourcePoint"/>
-                        <mxPoint x="585" y="870" as="targetPoint"/>
+                <mxCell id="148" value="&lt;b&gt;9 Validate confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=open;startFill=0;strokeColor=#545B64;rounded=0;fontSize=12;dashed=1;" edge="1" parent="33">
+                    <mxGeometry y="19" width="100" relative="1" as="geometry">
+                        <mxPoint x="75" y="860" as="sourcePoint"/>
+                        <mxPoint x="585" y="860" as="targetPoint"/>
                         <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="170" value="&lt;b&gt;15 Server sends encrypted response + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" edge="1" parent="33">
+                    <mxGeometry y="13" width="100" relative="1" as="geometry">
+                        <mxPoint x="70" y="1162" as="sourcePoint"/>
+                        <mxPoint x="827.5" y="1162.0526315789475" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="600" y="1162"/>
+                            <mxPoint x="600" y="1162"/>
+                        </Array>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="34" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;MbedTLS&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="672" y="19" width="150" height="1311" as="geometry"/>
-                </mxCell>
-                <mxCell id="84" value="Connection failed" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="34" source="36" edge="1">
-                    <mxGeometry x="-0.0038" y="-8" relative="1" as="geometry">
-                        <mxPoint x="525" y="279" as="sourcePoint"/>
-                        <mxPoint x="-192.25" y="279" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="78.19000000000005" y="279"/>
-                        </Array>
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
+                    <mxGeometry x="677" y="19" width="150" height="1601" as="geometry"/>
                 </mxCell>
                 <mxCell id="35" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;Communication&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="915" y="19" width="150" height="1291" as="geometry"/>
+                    <mxGeometry x="915" y="19" width="150" height="1611" as="geometry"/>
                 </mxCell>
                 <mxCell id="134" value="Establish connection" style="html=1;verticalAlign=bottom;endArrow=block;exitX=0.518;exitY=0.142;exitDx=0;exitDy=0;exitPerimeter=0;" parent="35" target="36" edge="1">
                     <mxGeometry x="0.0255" y="10" width="80" relative="1" as="geometry">
@@ -55,10 +56,17 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="36" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Communication&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1159" y="19" width="150" height="1291" as="geometry"/>
+                    <mxGeometry x="1163" y="13.5" width="150" height="1291" as="geometry"/>
+                </mxCell>
+                <mxCell id="166" value="13 Server receives encrypted request + HMAC" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" edge="1" parent="36">
+                    <mxGeometry x="-0.0465" width="160" relative="1" as="geometry">
+                        <mxPoint x="75.97736842105246" y="1061" as="sourcePoint"/>
+                        <mxPoint x="592.03" y="1061" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
                 <mxCell id="37" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;MbedTLS&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1417" y="18" width="150" height="1282" as="geometry"/>
+                    <mxGeometry x="1417" y="18" width="150" height="1582" as="geometry"/>
                 </mxCell>
                 <mxCell id="39" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Application&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
                     <mxGeometry x="1889" y="19" width="150" height="1311" as="geometry"/>
@@ -99,16 +107,16 @@
                 <mxCell id="96" value="" style="shape=umlLifeline;participant=umlActor;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;verticalAlign=top;spacingTop=36;outlineConnect=0;size=50;" parent="1" vertex="1">
                     <mxGeometry x="-37" y="19" width="30" height="1331" as="geometry"/>
                 </mxCell>
-                <mxCell id="101" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;1 Client generates a temporary RSA key pair.&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;exitX=0.53;exitY=0.479;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
-                    <mxGeometry x="0.0162" y="19" width="160" relative="1" as="geometry">
-                        <mxPoint x="486.0300000000002" y="445.789" as="sourcePoint"/>
+                <mxCell id="101" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;1 Client generates a temporary RSA key pair.&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="1" source="33" edge="1">
+                    <mxGeometry x="0.0286" y="6" width="160" relative="1" as="geometry">
+                        <mxPoint x="520" y="446" as="sourcePoint"/>
                         <mxPoint x="747.5" y="445.789" as="targetPoint"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="128" value="" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;exitX=0.53;exitY=0.511;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="128" value="" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;" parent="1" source="34" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
-                        <mxPoint x="753.5" y="479.41100000000006" as="sourcePoint"/>
+                        <mxPoint x="810" y="479" as="sourcePoint"/>
                         <mxPoint x="1493.5" y="479.41100000000006" as="targetPoint"/>
                         <Array as="points"/>
                     </mxGeometry>
@@ -124,46 +132,102 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="136" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Server&lt;br&gt;Session&lt;br&gt;&lt;/span&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
-                    <mxGeometry x="1678" y="18" width="150" height="1292" as="geometry"/>
+                    <mxGeometry x="1674" y="28.5" width="150" height="1541.5" as="geometry"/>
                 </mxCell>
-                <mxCell id="147" value="&lt;b&gt;8 Send encrypted confirmation + HMAC.&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=open;startFill=0;strokeColor=#545B64;rounded=0;fontSize=12;" edge="1" parent="136">
+                <mxCell id="147" value="&lt;b&gt;8 Send encrypted confirmation + HMAC.&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" edge="1" parent="136">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
-                        <mxPoint x="-688" y="811" as="sourcePoint"/>
-                        <mxPoint x="72" y="811" as="targetPoint"/>
+                        <mxPoint x="-688" y="798" as="sourcePoint"/>
+                        <mxPoint x="72" y="798" as="targetPoint"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="138" value="&lt;b&gt;3 Validate HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="1" edge="1">
+                <mxCell id="176" value="&lt;b&gt;14 Server decrypts request and validates HMAC&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="136">
+                    <mxGeometry x="-0.569" y="11" width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="73.44999999999982" y="1075.0359999999998" as="sourcePoint"/>
+                        <mxPoint x="71" y="1120.9200000000003" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="74" y="1071.45"/>
+                            <mxPoint x="151" y="1071.45"/>
+                            <mxPoint x="151" y="1121.45"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="138" value="&lt;b&gt;3 Validate HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;dashed=1;" parent="1" edge="1">
                     <mxGeometry x="-0.0923" y="7" width="160" relative="1" as="geometry">
                         <mxPoint x="1233.25" y="536.5" as="sourcePoint"/>
                         <mxPoint x="1490.4999999999995" y="536.5" as="targetPoint"/>
                         <mxPoint y="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="141" value="&lt;b&gt;4 Generate server key pair and &lt;br&gt;send server public key&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;exitX=0.524;exitY=0.632;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="141" value="&lt;b&gt;4 Generate server key pair and &lt;br&gt;send server public key&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontSize=12;exitX=0.524;exitY=0.632;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
                     <mxGeometry x="-0.0035" width="160" relative="1" as="geometry">
-                        <mxPoint x="1495.6" y="597.752" as="sourcePoint"/>
-                        <mxPoint x="1752.5" y="597.752" as="targetPoint"/>
+                        <mxPoint x="1495.6" y="585.752" as="sourcePoint"/>
+                        <mxPoint x="1747" y="587" as="targetPoint"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="142" value="&lt;b&gt;5 Encrypt session key using server public key + HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;exitX=0.52;exitY=0.711;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="142" value="&lt;b&gt;5 Encrypt session key using server public key + HMAC&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontSize=12;" parent="1" target="136" edge="1">
                     <mxGeometry width="160" relative="1" as="geometry">
-                        <mxPoint x="754" y="659.6109999999999" as="sourcePoint"/>
-                        <mxPoint x="1756.5" y="659.6109999999999" as="targetPoint"/>
+                        <mxPoint x="750" y="660" as="sourcePoint"/>
+                        <mxPoint x="1700" y="660" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="143" value="&lt;b&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;6 Decrypt session key + HMAC&lt;/font&gt;&lt;/b&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;entryX=0.507;entryY=0.796;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
-                    <mxGeometry x="-0.0245" y="3" width="160" relative="1" as="geometry">
+                    <mxGeometry x="-0.022" y="3" width="160" relative="1" as="geometry">
                         <mxPoint x="1233.3235294117649" y="725.1560000000002" as="sourcePoint"/>
                         <mxPoint x="1493.0500000000002" y="725.1560000000002" as="targetPoint"/>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="144" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;7 Validate session key + HMAC&lt;/b&gt;&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;entryX=0.496;entryY=0.82;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+                <mxCell id="144" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;&lt;b&gt;7 Validate session key + HMAC&lt;/b&gt;&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;" edge="1" parent="1" target="136">
                     <mxGeometry x="-0.0111" y="2" width="160" relative="1" as="geometry">
                         <mxPoint x="1491.5" y="769.4200000000001" as="sourcePoint"/>
-                        <mxPoint x="1752.4" y="769.4200000000001" as="targetPoint"/>
+                        <mxPoint x="1720" y="770" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="84" value="Connection failed" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;" parent="1" source="36" edge="1" target="33">
+                    <mxGeometry x="-0.0038" y="-8" relative="1" as="geometry">
+                        <mxPoint x="1198" y="298" as="sourcePoint"/>
+                        <mxPoint x="510" y="300" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="751.19" y="298"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="159" value="&lt;b&gt;10 Validate encrypted confirmation + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=open;startFill=0;strokeColor=#545B64;rounded=0;fontSize=12;dashed=1;" edge="1" parent="1">
+                    <mxGeometry x="-0.0444" y="16" width="100" relative="1" as="geometry">
+                        <mxPoint x="751.5" y="948.5" as="sourcePoint"/>
+                        <mxPoint x="989.5" y="938.5" as="targetPoint"/>
+                        <mxPoint x="1" y="1" as="offset"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="162" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;11 Session established&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" edge="1" parent="1" target="36">
+                    <mxGeometry x="-0.0187" width="160" relative="1" as="geometry">
+                        <mxPoint x="992" y="989.999" as="sourcePoint"/>
+                        <mxPoint x="1238.5" y="989.999" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="163" value="&lt;font style=&quot;font-size: 12px;&quot;&gt;12 Client Sends Encrypted Request + HMAC&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;entryX=0.484;entryY=0.794;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="33" target="36">
+                    <mxGeometry x="0.006" y="4" width="160" relative="1" as="geometry">
+                        <mxPoint x="520" y="1029.999" as="sourcePoint"/>
+                        <mxPoint x="1160" y="1040" as="targetPoint"/>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="171" value="&lt;b&gt;16 Client decrypts response &lt;br&gt;and validates HMAC.&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+                    <mxGeometry x="-0.5688" y="25" width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="487.4499999999998" y="1248.586" as="sourcePoint"/>
+                        <mxPoint x="485" y="1294.47" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="488" y="1244.97"/>
+                            <mxPoint x="555" y="1244.97"/>
+                            <mxPoint x="555" y="1294.97"/>
+                        </Array>
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>

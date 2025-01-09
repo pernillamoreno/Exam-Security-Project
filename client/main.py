@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
 )
 import sys
-
+from session import Session
 
 class ClientGui(QMainWindow):
     def __init__(self):
@@ -68,7 +68,29 @@ class ClientGui(QMainWindow):
         self.log_area.append("Establish Session: Done")
 
     def get_temperature(self):
-        self.log_area.append("Temperature: Here is my temp")
+     """
+        try:
+            # Toggle the relay state
+            command = "TOGGLE_ON" if not self.relay_state else "TOGGLE_OFF"
+            self.serial_connection.write((command + '\n').encode())  # Send command to ESP32
+            time.sleep(0.5)  # Wait for ESP32 to respond
+
+            # Read acknowledgment from ESP32
+            response = self.serial_connection.readline().decode().strip()
+            if response == "LED_ON":
+                self.relay_state = True
+                self.log_area.append("Relay State: On")
+            elif response == "LED_OFF":
+                self.relay_state = False
+                self.log_area.append("Relay State: Off")
+            else:
+                self.log_area.append("Error: No response from ESP32")
+        except Exception as e:
+            self.log_area.append(f"Error: {e}")
+
+    def clear_log(self):
+        self.log_area.clear()"""
+        #self.log_area.append("Temperature: Here is my temp")
 
     def toggle_relay(self):
         try:

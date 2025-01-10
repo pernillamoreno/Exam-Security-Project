@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="hEeOqorTtUtQZ6ahrq-n" name="Page-1">
-        <mxGraphModel dx="1191" dy="459" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2795" dy="1330" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -442,7 +442,7 @@
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="291" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
-                    <mxGeometry x="-47" y="2023" width="30" height="70" as="geometry"/>
+                    <mxGeometry x="-47" y="1986" width="30" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="308" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;User interface&lt;br&gt;&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
                     <mxGeometry x="148" y="1985" width="158" height="1970" as="geometry"/>

@@ -1,5 +1,5 @@
-#include "session/session.h"
-#include "commnctn/commnctn.h"
+#include "session.h"
+#include "commnctn.h"
 #include <Arduino.h>
 
 void setup()

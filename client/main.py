@@ -10,6 +10,8 @@ from PyQt6.QtWidgets import (
 import sys
 from session import Session
 
+ports= None
+
 class ClientGui(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -103,5 +105,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

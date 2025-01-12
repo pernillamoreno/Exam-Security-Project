@@ -5,7 +5,6 @@ BAUDRATE = 115200
 class Communication:
      def __init__(self, port, baudrate=BAUDRATE):
         self.ser = serial.Serial(port, baudrate)
-        self.ser = serial.Serial(port, baudrate)
         
      def communication_send(self, buffer: bytes) -> int:
         if not self.ser.is_open:

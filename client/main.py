@@ -82,6 +82,12 @@ class ClientGui(QMainWindow):
 
     def clear_log(self):
         self.log_area.clear()
+        
+    
+    def on_close(self):
+        if self.session_active:
+            self.close_session()
+        self.root.destroy()    
 
 def main():
     app = QApplication(sys.argv)
@@ -90,4 +96,4 @@ def main():
     sys.exit(app.exec())
 
 if __name__ == "__main__":
-    main()
+    main() 

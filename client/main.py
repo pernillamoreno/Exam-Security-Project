@@ -42,7 +42,7 @@ class ClientGui(QMainWindow):
         self.setFixedSize(500, 400)
 
         # Initialize session
-        self.session = Session("/dev/ttyUSB0")
+        self.session = Session("/dev/ttyUSB1")
 
 
         # Main layout

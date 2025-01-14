@@ -20,18 +20,18 @@ bool communication_init(void)
     ;
 }
 
-bool communication_write(const uint8_t *data, size_t data_len)
+bool communication_write(const uint8_t *data, size_t dlen)
 {
-    return (data_len == Serial.write(data, data_len)); /**< Write the data to the Serial Communication */
+    return (dlen == Serial.write(data, dlen)); /**< Write the data to the Serial Communication */
 }
 
-size_t communication_read(uint8_t *buf, size_t buf_len)
+size_t communication_read(uint8_t *buf, size_t blen)
 {
     while (0 == Serial.available())
     {
         ; /**< Wait until data is available */
     }
 
-    return Serial.readBytes(buf, buf_len); /**< Read available bytes into the buffer */
+    return Serial.readBytes(buf, blen); /**< Read available bytes into the buffer */
 }
   

@@ -1,9 +1,27 @@
+"""
+    Client gui
+"""
+
 import sys
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
 )
 from PyQt6.QtCore import QThread, pyqtSignal
+import serial.tools.list_ports
 from session import Session
+
+
+class GetTemperatureThread(QThread):
+    result = pyqtSignal(int, str)
+
+    def __init__(self, session):
+        super().__init__()
+        self.session = session
+
+    def run(self):
+        status, message = self.session.get_temperature()
+        self.result.emit(status, message)
+
 
 class ToggleRelayThread(QThread):
     result = pyqtSignal(int, str)
@@ -16,6 +34,7 @@ class ToggleRelayThread(QThread):
         status, message = self.session.toggle_relay()
         self.result.emit(status, message)
 
+
 class ClientGui(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -24,6 +43,7 @@ class ClientGui(QMainWindow):
 
         # Initialize session
         self.session = Session("/dev/ttyUSB0")
+
 
         # Main layout
         self.central_widget = QWidget()
@@ -62,32 +82,34 @@ class ClientGui(QMainWindow):
 
         # Connect button clicks
         self.close_session_button.clicked.connect(self.close_session)
-        self.get_temp_button.clicked.connect(self.get_temperature)
+        self.get_temp_button.clicked.connect(self.handle_get_temperature)
         self.toggle_relay_button.clicked.connect(self.handle_toggle_relay)
         self.clear_button.linkActivated.connect(self.clear_log)
 
-    def close_session(self):
-        self.log_area.append("Session Closed")
-
-    def get_temperature(self):
-        self.log_area.append("Temperature: Not Implemented")
+    def handle_get_temperature(self):
+        """Handle the Get Temperature button click."""
+        self.temp_thread = GetTemperatureThread(self.session)
+        self.temp_thread.result.connect(self.display_message)
+        self.temp_thread.start()
 
     def handle_toggle_relay(self):
+        """Handle the Toggle Relay button click."""
         self.toggle_thread = ToggleRelayThread(self.session)
         self.toggle_thread.result.connect(self.display_message)
         self.toggle_thread.start()
 
     def display_message(self, status, message):
+        """Display messages in the log area."""
         self.log_area.append(message)
 
+    def close_session(self):
+        """Handle the Close Session button click."""
+        self.log_area.append("Session Closed")
+
     def clear_log(self):
+        """Clear the log area."""
         self.log_area.clear()
-        
-    
-    def on_close(self):
-        if self.session_active:
-            self.close_session()
-        self.root.destroy()    
+
 
 def main():
     app = QApplication(sys.argv)
@@ -95,5 +117,6 @@ def main():
     window.show()
     sys.exit(app.exec())
 
+
 if __name__ == "__main__":
-    main() 
+    main()

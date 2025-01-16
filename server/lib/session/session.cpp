@@ -40,14 +40,24 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
                                               0x9d, 0x3f, 0xe2, 0x97, 0x14, 0xbe, 0x24, 0x62,
                                               0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
 
-static size_t client_read(uint8_t *buffer, size_t blen)
+
+static size_t client_read(uint8_t *buf, size_t blen)
 {
-    return 0;
+    size_t lenght = communication_read(buf,blen)
+
+    if (lenght > HASH_SIZE)
+    {
+        lenght -= HASH_SIZE;
+        uint8_t hmac[HASH_SIZE]{0};
+        mbedtls_md_hmac_starts(&hmac_ctx, )
+    }
+
+     return 0;
 }
 
-static bool client_write(const uint8_t *data, size_t dlen)
+static bool client_write(const uint8_t *buf, size_t dlen)
 {
-    return communication_write(buffer, dlen);
+    return communication_write(buf, dlen);
 }
 static void exchange_public_keys(void)
 {

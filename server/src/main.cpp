@@ -1,4 +1,5 @@
 #include "commnctn.h"
+#include "session.h"
 #include <Arduino.h>
 
 // Define macros
@@ -6,6 +7,7 @@
 #define GET_TEMP 0x01
 #define LED_ON 0x01
 #define LED_OFF 0x00
+
 
 // Declare ESP32 temperature sensor function
 extern "C"

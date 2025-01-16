@@ -10,6 +10,7 @@ class Session:
     __CLOSE = 0
     __GET_TEMP = 1
     __TOGGLE_RELAY = 3
+    
 
     STATUS_OKAY = 0
     STATUS_ERROR = 1
@@ -28,11 +29,16 @@ class Session:
             raise Exception("Faild to connect")
         
         self.__HMAC_KEY = hashlib.sha256()
-        self.__HMAC_KEY.update(self.__SECRET_KEY)
+        self.__HMAC_KEY.update(Session.__SECRET_KEY)
         self.__HMAC_KEY = self.__HMAC_KEY.digest()
         self.__HMAC_KEY = hmac.new(self.__HMAC_KEY, digestmod="SHA256")
         print("      HMAC Key =", self.__HMAC_KEY.digest().hex()) #REMOVE THIS LATER
         
+        # RSA keys generation
+        self.client_public_rsa = pk.RSA()
+        self.client_public_rsa.generate(Session.__RSA_SIZE * 8, Session.__EXPONENT)
+        print("\n  Public Key =", self.client_public_rsa.export_public_key().hex())#REMOVE THIS LATER
+
 
     def toggle_relay(self):
         """Toggle the relay state."""
@@ -65,9 +71,13 @@ class Session:
            if len(response) == 4:
               # Convert bytes to float
               temperature = float.fromhex(response.hex())
-              return self.STATUS_OKAY, f"Temperature: {temperature:.2f} °C"
+              return self.STATUS_OKAY, "Temperature: "+ str(temperature)+ "°C"
            else:
             return self.STATUS_ERROR, "Failed to read temperature"
 
         except Exception as e:
            return self.STATUS_CONNECTION_ERROR, f"Error: {e}"
+       
+       
+         # buffer= self.__recive *2 session.__rsa_size
+         #if  0 ==   buffwer seld clinetr rsa +export pub key + self clientrsa.sign (session__secret_key , sha256)

@@ -1,12 +1,13 @@
 import serial
+import time
 
 BAUDRATE = 115200
 
 class Communication:
      def __init__(self, port, baudrate=BAUDRATE):
-        self.ser = serial.Serial(port, baudrate)
-        
-     def communication_send(self, buffer: bytes) -> int:
+         self.ser = serial.Serial(port, baudrate, timeout=1)
+      
+     def communication_send(self, buffer: bytes):
         if not self.ser.is_open:
             raise Exception("Serial connection is not open.")
         return self.ser.write(buffer)

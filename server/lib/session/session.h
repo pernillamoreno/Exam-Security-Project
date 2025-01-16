@@ -25,6 +25,7 @@ constexpr int AES_BLOCK_SIZE{16};    /**< AES block size (128 bits) */
 constexpr int RSA_SIZE{256};         /**< RSA key size (2048 bits) */
 constexpr int DER_SIZE{294};         /**< Maximum DER encoding size */
 constexpr int HASH_SIZE{32};         /**< Hash size for HMAC (256 bits) */
+constexpr int EXPONENT{65537};
 constexpr int SESSION_TIMEOUT{3000}; /**< Session timeout in milliseconds */
 
 // Session Commands

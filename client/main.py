@@ -11,6 +11,8 @@ import serial.tools.list_ports
 from session import Session
 
 
+
+
 class GetTemperatureThread(QThread):
     result = pyqtSignal(int, str)
 
@@ -42,7 +44,7 @@ class ClientGui(QMainWindow):
         self.setFixedSize(500, 400)
 
         # Initialize session
-        self.session = Session("/dev/ttyUSB1")
+        self.session = Session("/dev/ttyUSB0")
 
 
         # Main layout

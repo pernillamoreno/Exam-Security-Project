@@ -2,52 +2,85 @@
 #include "session.h"
 #include <Arduino.h>
 
-// Define macros
-#define TOGGLE_RELAY 0x03
-#define GET_TEMP 0x01
-#define LED_ON 0x01
-#define LED_OFF 0x00
 
-// Declare ESP32 temperature sensor function
-extern "C"
+#define STR(x) #x
+#define STRINGIPY(x) STR(x)
+
+#define RED_PIN GPIO_NUM_21
+#define GREEN_PIN GPIO_NUM_4
+#define BLUE_PIN GPIO_NUM_5
+
+static void set_status(int status)
 {
-  uint8_t temprature_sens_read();
+  digitalWrite(RED_PIN, LOW);
+  digitalWrite(GREEN_PIN, LOW);
+  digitalWrite(BLUE_PIN, LOW);
+
+  switch (status)
+  {
+  case SESSION_ERROR:
+    digitalWrite(RED_PIN, HIGH);
+    break;
+
+  case SESSION_WARNING:
+    digitalWrite(BLUE_PIN, HIGH);
+    break;
+
+  default:
+    digitalWrite(GREEN_PIN, HIGH);
+    break;
+  }
 }
 
 void setup()
 {
-  pinMode(21, OUTPUT);  // Relay pin
-  communication_init(); // Initialize communication
+  pinMode(GPIO_NUM_32, OUTPUT);
+  pinMode(RED_PIN, OUTPUT);
+  pinMode(GREEN_PIN, OUTPUT);
+  pinMode(BLUE_PIN, OUTPUT);
+
+  set_status(SESSION_OKAY);
+
+  if (SESSION_OKAY != session_init(STRINGIPY()))
+  {
+    set_status(SESSION_ERROR);
+
+    while (1)
+    {
+      ;
+    }
+  }
 }
 
 void loop()
 {
-  uint8_t command;
-  size_t len = communication_read(&command, sizeof(command));
+  int request = session_request();
 
-  if (len > 0)
+  switch (request)
   {
-    if (command == TOGGLE_RELAY)
-    {
-      // Toggle relay state
-      int currentState = digitalRead(21);
-      int newState = !currentState;
-      digitalWrite(21, newState);
+  case SESSION_ESTABLISH:
+    request = session_establish();
+    break;
 
-      // Send acknowledgment
-      uint8_t response = (newState == HIGH) ? LED_ON : LED_OFF;
-      communication_write(&response, sizeof(response));
-    }
-    else if (command == GET_TEMP)
-    {
-      // Read internal temperature sensor
-      uint8_t raw_temperature = temprature_sens_read(); // Raw temp in Fahrenheit
-      float temperature = (raw_temperature - 32) / 1.8; // Convert to Celsius
+  case SESSION_CLOSE:
+    request = session_close();
+    break;
 
-      // Send temperature as a float
-      uint8_t buffer[sizeof(float)];
-      memcpy(buffer, &temperature, sizeof(float));
-      communication_write(buffer, sizeof(buffer));
-    }
+  case SESSION_GET_TEMP:
+    request = session_send_temperature(temperatureRead());
+    break;
+
+  case SESSION_TOGGLE_RELAY:
+    static uint8_t state = LOW;
+    state = (state == LOW) ? HIGH : LOW;
+    digitalWrite(GPIO_NUM_32, state);
+    request = (state == digitalRead(GPIO_NUM_32)) ? session_send_relay_state;
+
+    break;
+
+  default:
+    break;
   }
+
+  set_status(request);
 }

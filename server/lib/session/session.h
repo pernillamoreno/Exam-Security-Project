@@ -19,12 +19,18 @@
 #include <mbedtls/ctr_drbg.h>
 #include <mbedtls/entropy.h>
 
+enum
+{
+    SESSION_OKAY,
+    SESSION_GET_TEMP,
+    SESSION_ESTABLISH,
+    SESSION_TOGGLE_RELAY,
+    SESSION_ERROR,
+    SESSION_WARNING,
+    SESSION_CLOSE
 
-// Session Commands
-#define SESSION_CLOSE 0x00
-#define SESSION_ESTABLISH 0x01
-#define SESSION_GET_TEMP 0x02
-#define SESSION_TOGGLE_RELAY 0x03
+};
+
 
 // Function Prototypes
 
@@ -34,7 +40,8 @@ static void exchange_public_keys(void);                      // Exchange keys af
 static bool session_write(const uint8_t *data, size_t size); // Write session-specific data, size = size of data to be written
 bool session_init(void);
                                          // Initialize the session (HMAC, AES, etc.)
-bool session_establish(void);                                    // Establish the session
+bool session_establish(void);
+int session_request(void);                                      // Establish the session
 bool session_response(const uint8_t *res, size_t rlen);     // Send responses, rlen = len of response 
 void session_close(void);                                        // Finally, close the session
 

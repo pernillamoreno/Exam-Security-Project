@@ -18,15 +18,7 @@
 #include <mbedtls/entropy.h>
 #include <mbedtls/ctr_drbg.h>
 
-enum
-{
-    STATUS_OKAY,
-    STATUS_ERROR,
-    STATUS_EXPIRED,
-    STATUS_HASH_ERROR,
-    STATUS_BAD_REQUEST,
-    STATUS_INVALID_SESSION,
-};
+
 
 // Constants for Cryptographic Parameters
 constexpr int AES_SIZE{32};       /**< AES key size (256 bits) */
@@ -35,6 +27,7 @@ constexpr int RSA_SIZE{256};      /**< RSA key size (2048 bits) */
 constexpr int DER_SIZE{294};      /**< Maximum DER encoding size */
 constexpr int HASH_SIZE{32};      /**< Hash size for HMAC (256 bits) */
 constexpr int EXPONENT{65537};
+constexpr int KEEP_ALIVE{60000};
 constexpr int SESSION_TIMEOUT{3000}; /**< Session timeout in milliseconds */
 
 // Static Cryptographic Contexts
@@ -50,7 +43,7 @@ static uint32_t accessed = 0;                     /**< Last time the session was
 static uint64_t session_id = 0;                   /**< Session ID */
 static uint8_t aes_key[AES_SIZE] = {0};           /**< AES Key */
 static uint8_t enc_iv[AES_BLOCK_SIZE] = {0};      /**< Encryption IV */
-static uint8_t dec_iv[AES_BLOCK_SIZE] = {0};      /**< Decryption IV */
+static uint8_t dec_iv[AES_BLOCK_SIZE] = {0};     /**< Decryption IV */
 static uint8_t buffer[DER_SIZE + RSA_SIZE] = {0}; /**< Temporary Buffer */
 
 // Security key
@@ -125,6 +118,10 @@ bool session_init(void)
     return status;
 }                                     
 bool session_establish(void)
+{
+    return 0;
+}
+int session_request(void) 
 {
     return 0;
 }

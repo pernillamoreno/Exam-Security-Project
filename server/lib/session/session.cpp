@@ -18,6 +18,25 @@
 #include <mbedtls/entropy.h>
 #include <mbedtls/ctr_drbg.h>
 
+enum
+{
+    STATUS_OKAY,
+    STATUS_ERROR,
+    STATUS_EXPIRED,
+    STATUS_HASH_ERROR,
+    STATUS_BAD_REQUEST,
+    STATUS_INVALID_SESSION,
+};
+
+// Constants for Cryptographic Parameters
+constexpr int AES_SIZE{32};       /**< AES key size (256 bits) */
+constexpr int AES_BLOCK_SIZE{16}; /**< AES block size (128 bits) */
+constexpr int RSA_SIZE{256};      /**< RSA key size (2048 bits) */
+constexpr int DER_SIZE{294};      /**< Maximum DER encoding size */
+constexpr int HASH_SIZE{32};      /**< Hash size for HMAC (256 bits) */
+constexpr int EXPONENT{65537};
+constexpr int SESSION_TIMEOUT{3000}; /**< Session timeout in milliseconds */
+
 // Static Cryptographic Contexts
 static mbedtls_aes_context aes_ctx;       /**< AES Context */
 static mbedtls_md_context_t hmac_ctx;     /**< HMAC Context */
@@ -43,29 +62,59 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
 
 static size_t client_read(uint8_t *buf, size_t blen)
 {
-    size_t lenght = communication_read(buf,blen)
+    size_t lenght = communication_read(buf, blen);
 
     if (lenght > HASH_SIZE)
     {
         lenght -= HASH_SIZE;
         uint8_t hmac[HASH_SIZE]{0};
-        mbedtls_md_hmac_starts(&hmac_ctx, )
+        mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
+        mbedtls_md_hmac_update(&hmac_ctx, buf, lenght);
+        mbedtls_md_hmac_finish(&hmac_ctx, hmac);
+        if (0 != memcmp(hmac, buf + lenght, HASH_SIZE))
+        {
+            lenght = 0;
+        }
+    }
+    else
+    {
+        lenght = 0;
     }
 
-     return 0;
+     return lenght;
 }
 
 static bool client_write(const uint8_t *buf, size_t dlen)
 {
-    return communication_write(buf, dlen);
+    if (dlen + HASH_SIZE > sizeof(buffer)) // Prevent buffer overflow
+    {
+        return false;
+    }
+
+    uint8_t hmac[HASH_SIZE]; //Store HMAC separately
+
+    //Generate HMAC without modifying `buf`
+    mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
+    mbedtls_md_hmac_update(&hmac_ctx, buf, dlen);
+    mbedtls_md_hmac_finish(&hmac_ctx, hmac); // HMAC is stored in `hmac` array
+
+    // Copy original data + HMAC to `buffer`
+    memcpy(buffer, buf, dlen);
+    memcpy(buffer + dlen, hmac, HASH_SIZE);
+
+    dlen += HASH_SIZE; //Update length to include HMAC
+
+    return communication_write(buffer, dlen) == dlen; //Ensure full write
 }
+
 static void exchange_public_keys(void)
 {
     session_id = 0;
     size_t olen, length;
     bool status = false;
 }
-static bool session_write(const uint8_t *data, size_t dlen)
+
+static bool session_write(const uint8_t *data, size_t size)
 {
     bool status = false;
     return status;
@@ -78,8 +127,8 @@ bool session_init(void)
 bool session_establish(void)
 {
     return 0;
-}                               
-bool session_response(const uint8_t *data, size_t dlen)
+}
+bool session_response(const uint8_t *res, size_t rlen)
 {
     size_t len = 1;
     uint8_t response[AES_BLOCK_SIZE] = {0};

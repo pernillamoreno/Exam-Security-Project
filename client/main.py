@@ -2,45 +2,69 @@
     Client gui
 """
 
-import serial  # Import pyserial library
-import time
+import sys
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
 )
-import sys
+from PyQt6.QtCore import QThread, pyqtSignal
+import serial.tools.list_ports
 from session import Session
+
+
+
+
+class GetTemperatureThread(QThread):
+    result = pyqtSignal(int, str)
+
+    def __init__(self, session):
+        super().__init__()
+        self.session = session
+
+    def run(self):
+        status, message = self.session.get_temperature()
+        self.result.emit(status, message)
+
+
+class ToggleRelayThread(QThread):
+    result = pyqtSignal(int, str)
+
+    def __init__(self, session):
+        super().__init__()
+        self.session = session
+
+    def run(self):
+        status, message = self.session.toggle_relay()
+        self.result.emit(status, message)
+
 
 class ClientGui(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Client")
-        self.setFixedSize(500, 400)  # fixed size 
+        self.setFixedSize(500, 400)
 
-        # Initialize serial communication
-        self.serial_connection = serial.Serial(port="/dev/ttyUSB0", baudrate=9600, timeout=1)
+        # Initialize session
+        self.session = Session("/dev/ttyUSB0")
+
 
         # Main layout
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.main_layout = QVBoxLayout()
         self.main_layout.setContentsMargins(10, 10, 10, 10)
-        self.main_layout.setSpacing(10)  # Add spacing between widgets
+        self.main_layout.setSpacing(10)
 
         self.button_layout = QHBoxLayout()
-
-        # Buttons
-        self.close_session_button = QPushButton("Close Session")
-        self.get_temp_button = QPushButton("Get Temperature")
         self.toggle_relay_button = QPushButton("Toggle Relay")
         self.clear_button = QLabel("<a href='#'>Clear</a>")
         self.clear_button.setStyleSheet("color: blue; text-decoration: underline;")
         self.clear_button.setOpenExternalLinks(False)
 
-        #  buttons to horizontal layout
+        # Add buttons to horizontal layout
         self.button_layout.addWidget(self.close_session_button)
         self.button_layout.addWidget(self.get_temp_button)
         self.button_layout.addWidget(self.toggle_relay_button)
-        self.button_layout.addStretch()  # Add space to right
+        self.button_layout.addStretch()
         self.button_layout.addWidget(self.clear_button)
 
         # Text area
@@ -56,41 +80,40 @@ class ClientGui(QMainWindow):
 
         # Connect button clicks
         self.close_session_button.clicked.connect(self.close_session)
-        self.get_temp_button.clicked.connect(self.get_temperature)
-        self.toggle_relay_button.clicked.connect(self.toggle_relay)
+        self.get_temp_button.clicked.connect(self.handle_get_temperature)
+        self.toggle_relay_button.clicked.connect(self.handle_toggle_relay)
         self.clear_button.linkActivated.connect(self.clear_log)
 
-        # Relay state tracking
-        self.relay_state = False
+    def handle_get_temperature(self):
+   
+      try:
+        self.temp_thread = GetTemperatureThread(self.session)
+        self.temp_thread.result.connect(self.display_message)
+        self.temp_thread.start()
+      except Exception as e:
+        self.display_message(1, f"Error: {e}")
 
-    # Button functions
+    def handle_toggle_relay(self):
+     try:
+        self.toggle_thread = ToggleRelayThread(self.session)
+        self.toggle_thread.result.connect(self.display_message)
+        self.toggle_thread.start()
+     except Exception as e:
+        self.display_message(1, f"Error: {e}")
+
+    def display_message(self, status, message):
+    
+     if "Decryption failed" in message:
+        self.log_area.append("Error: Secure key exchange failed! Ensure server is sending correct data.")
+     else:
+        self.log_area.append(message)
+
     def close_session(self):
-        self.log_area.append("Establish Session: Done")
-
-    def get_temperature(self):
-        self.log_area.append("Temperature: Here is my temp")
-
-    def toggle_relay(self):
-        try:
-            # Toggle the relay state
-            command = "TOGGLE_ON" if not self.relay_state else "TOGGLE_OFF"
-            self.serial_connection.write((command + '\n').encode())  # Send command to ESP32
-            time.sleep(0.5)  # Wait for ESP32 to respond
-
-            # Read acknowledgment from ESP32
-            response = self.serial_connection.readline().decode().strip()
-            if response == "LED_ON":
-                self.relay_state = True
-                self.log_area.append("Relay State: On")
-            elif response == "LED_OFF":
-                self.relay_state = False
-                self.log_area.append("Relay State: Off")
-            else:
-                self.log_area.append("Error: No response from ESP32")
-        except Exception as e:
-            self.log_area.append(f"Error: {e}")
+        """Handle the Close Session button click."""
+        self.log_area.append("Session Closed")
 
     def clear_log(self):
+        """Clear the log area."""
         self.log_area.clear()
 
 

@@ -16,6 +16,7 @@
 #include <mbedtls/md.h>
 #include <mbedtls/aes.h>
 #include <mbedtls/pk.h>
+#include <mbedtls/sha256.h>
 #include <mbedtls/ctr_drbg.h>
 #include <mbedtls/entropy.h>
 
@@ -30,7 +31,14 @@ enum
     SESSION_CLOSE
 
 };
-
+enum
+{
+    STATUS_EXPIRED,
+    STATUS_HASH_ERROR,
+    STATUS_BAD_REQUEST,
+    STATUS_INVALID_SESSION,
+    STATUS_CONNECTION_ERROR
+};
 
 // Function Prototypes
 

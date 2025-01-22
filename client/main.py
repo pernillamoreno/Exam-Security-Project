@@ -55,6 +55,10 @@ class ClientGui(QMainWindow):
         self.main_layout.setSpacing(10)
 
         self.button_layout = QHBoxLayout()
+
+        # Buttons
+        self.close_session_button = QPushButton("Close Session")
+        self.get_temp_button = QPushButton("Get Temperature")
         self.toggle_relay_button = QPushButton("Toggle Relay")
         self.clear_button = QLabel("<a href='#'>Clear</a>")
         self.clear_button.setStyleSheet("color: blue; text-decoration: underline;")
@@ -85,27 +89,19 @@ class ClientGui(QMainWindow):
         self.clear_button.linkActivated.connect(self.clear_log)
 
     def handle_get_temperature(self):
-   
-      try:
+        """Handle the Get Temperature button click."""
         self.temp_thread = GetTemperatureThread(self.session)
         self.temp_thread.result.connect(self.display_message)
         self.temp_thread.start()
-      except Exception as e:
-        self.display_message(1, f"Error: {e}")
 
     def handle_toggle_relay(self):
-     try:
+        """Handle the Toggle Relay button click."""
         self.toggle_thread = ToggleRelayThread(self.session)
         self.toggle_thread.result.connect(self.display_message)
         self.toggle_thread.start()
-     except Exception as e:
-        self.display_message(1, f"Error: {e}")
 
     def display_message(self, status, message):
-    
-     if "Decryption failed" in message:
-        self.log_area.append("Error: Secure key exchange failed! Ensure server is sending correct data.")
-     else:
+        """Display messages in the log area."""
         self.log_area.append(message)
 
     def close_session(self):

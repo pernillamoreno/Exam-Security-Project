@@ -8,16 +8,15 @@
 #define LED_ON 0x01
 #define LED_OFF 0x00
 
-// Declare ESP32 temperature sensor function
-extern "C"
-{
-  uint8_t temprature_sens_read();
-}
+// Define pin numbers
+#define PIN_32 32 // Relay control pin
+#define PIN_21 2  // ESP32 inbuilt LED
 
 void setup()
 {
-  pinMode(21, OUTPUT);  // Relay pin
-  communication_init(); // Initialize communication
+  pinMode(PIN_32, OUTPUT); // Set Pin 32 as an output (relay)
+  pinMode(PIN_21, OUTPUT); // Set Pin 2 as an output (for debugging)
+  communication_init();    // Initialize serial communication
 }
 
 void loop()
@@ -29,10 +28,15 @@ void loop()
   {
     if (command == TOGGLE_RELAY)
     {
-      // Toggle relay state
-      int currentState = digitalRead(21);
+      // Toggle relay state on Pin 32
+      int currentState = digitalRead(PIN_32);
       int newState = !currentState;
-      digitalWrite(21, newState);
+      digitalWrite(PIN_32, newState);
+
+      // Toggle PIN_21 (for debugging)
+      int currentState2 = digitalRead(PIN_21);
+      int newState2 = !currentState2;
+      digitalWrite(PIN_21, newState2);
 
       // Send acknowledgment
       uint8_t response = (newState == HIGH) ? LED_ON : LED_OFF;
@@ -40,14 +44,13 @@ void loop()
     }
     else if (command == GET_TEMP)
     {
-      // Read internal temperature sensor
-      uint8_t raw_temperature = temprature_sens_read(); // Raw temp in Fahrenheit
-      float temperature = (raw_temperature - 32) / 1.8; // Convert to Celsius
+      // Use the correct built-in ESP32 function
+      float temperature = temperatureRead(); // Get temperature in Celsius
+      char tempBuffer[10];
+      dtostrf(temperature, 6, 2, tempBuffer); // Convert float to string
 
-      // Send temperature as a float
-      uint8_t buffer[sizeof(float)];
-      memcpy(buffer, &temperature, sizeof(float));
-      communication_write(buffer, sizeof(buffer));
+      // Send temperature as a string
+      communication_write((uint8_t *)tempBuffer, strlen(tempBuffer) + 1);
     }
   }
 }

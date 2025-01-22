@@ -37,6 +37,7 @@ static mbedtls_pk_context client_key_ctx; /**< Client Public Key Context */
 static mbedtls_pk_context server_key_ctx; /**< Server Public Key Context */
 static mbedtls_entropy_context entropy;   /**< Entropy Context */
 static mbedtls_ctr_drbg_context ctr_drbg; /**< CTR DRBG Context */
+static mbedtls_sha256_context sha256_ctx;
 
 // Session Variables
 static uint32_t accessed = 0;                     /**< Last time the session was accessed */

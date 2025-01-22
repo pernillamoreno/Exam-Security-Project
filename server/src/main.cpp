@@ -1,81 +1,56 @@
-#include <Arduino.h>
+#include "commnctn.h"
 #include "session.h"
+#include <Arduino.h>
 
-#define RED_PIN GPIO_NUM_21
-#define GREEN_PIN GPIO_NUM_4
-#define BLUE_PIN GPIO_NUM_5
+// Define macros
+#define TOGGLE_RELAY 0x03
+#define GET_TEMP 0x01
+#define LED_ON 0x01
+#define LED_OFF 0x00
 
-Session session;
-
-static void set_status(int status)
-{
-  digitalWrite(RED_PIN, LOW);
-  digitalWrite(GREEN_PIN, LOW);
-  digitalWrite(BLUE_PIN, LOW);
-
-  switch (status)
-  {
-  case SESSION_ERROR:
-    digitalWrite(RED_PIN, HIGH);
-    break;
-
-  case SESSION_WARNING:
-    digitalWrite(BLUE_PIN, HIGH);
-    break;
-
-  default:
-    digitalWrite(GREEN_PIN, HIGH);
-    break;
-  }
-}
+// Define pin numbers
+#define PIN_32 32 // Relay control pin
+#define PIN_21 2  // ESP32 inbuilt LED
 
 void setup()
 {
-  pinMode(GPIO_NUM_32, OUTPUT);
-  pinMode(RED_PIN, OUTPUT);
-  pinMode(GREEN_PIN, OUTPUT);
-  pinMode(BLUE_PIN, OUTPUT);
-
-  set_status(SESSION_OKAY);
-
-  if (SESSION_OKAY != session.session_init())
-  {
-    set_status(SESSION_ERROR);
-    while (1)
-    {
-      ;
-    }
-  }
+  pinMode(PIN_32, OUTPUT); // Set Pin 32 as an output (relay)
+  pinMode(PIN_21, OUTPUT); // Set Pin 2 as an output (for debugging)
+  communication_init();    // Initialize serial communication
 }
 
 void loop()
 {
-  int request = session.session_request();
+  uint8_t command;
+  size_t len = communication_read(&command, sizeof(command));
 
-  switch (request)
+  if (len > 0)
   {
-  case SESSION_ESTABLISH:
-    request = session.session_establish();
-    break;
+    if (command == TOGGLE_RELAY)
+    {
+      // Toggle relay state on Pin 32
+      int currentState = digitalRead(PIN_32);
+      int newState = !currentState;
+      digitalWrite(PIN_32, newState);
 
-  case SESSION_CLOSE:
-    session.session_close();
-    break;
+      // Toggle PIN_21 (for debugging)
+      int currentState2 = digitalRead(PIN_21);
+      int newState2 = !currentState2;
+      digitalWrite(PIN_21, newState2);
 
-  case SESSION_GET_TEMP:
-    request = session.session_send_temperature(temperatureRead());
-    break;
+      // Send acknowledgment
+      uint8_t response = (newState == HIGH) ? LED_ON : LED_OFF;
+      communication_write(&response, sizeof(response));
+    }
+    else if (command == GET_TEMP)
+    {
+      // Use the correct built-in ESP32 function
+      float temperature = temperatureRead(); // Get temperature in Celsius
+      char tempBuffer[10];
+      dtostrf(temperature, 6, 2, tempBuffer); // Convert float to string
 
-  case SESSION_TOGGLE_RELAY:
-    static uint8_t state = LOW;
-    state = (state == LOW) ? HIGH : LOW;
-    digitalWrite(GPIO_NUM_32, state);
-    request = (state == digitalRead(GPIO_NUM_32)) ? session.session_send_relay_state(state) : SESSION_ERROR;
-    break;
-
-  default:
-    break;
+      // Send temperature as a string
+      communication_write((uint8_t *)tempBuffer, strlen(tempBuffer) + 1);
+    }
   }
-
-  set_status(request);
 }

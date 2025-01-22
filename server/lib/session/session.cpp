@@ -1,168 +1,139 @@
 /**
  * @file session.cpp
  * @author Pernilla S S-Moreno
- * @brief Secure session implementation with HMAC and AES encryption.
+ * @brief
  * @version 0.1
  * @date 2025-01-09
  *
  * @copyright Copyright (c) 2025
  *
  */
-
-#include "session.h"
 #include "commnctn.h"
+#include "session.h"
+#include <Arduino.h>
 #include <mbedtls/md.h>
 #include <mbedtls/pk.h>
 #include <mbedtls/rsa.h>
 #include <mbedtls/aes.h>
 #include <mbedtls/entropy.h>
 #include <mbedtls/ctr_drbg.h>
-#include <Arduino.h>
 
-/**
- * @brief Reads data from communication and verifies integrity using HMAC.
- *
- * @param buf Buffer to store received data.
- * @param blen Maximum length of the buffer.
- * @return Length of valid data if successful, otherwise 0.
- */
-size_t Session::client_receive(uint8_t *buf, size_t blen)
+
+
+// Constants for Cryptographic Parameters
+constexpr int AES_SIZE{32};       /**< AES key size (256 bits) */
+constexpr int AES_BLOCK_SIZE{16}; /**< AES block size (128 bits) */
+constexpr int RSA_SIZE{256};      /**< RSA key size (2048 bits) */
+constexpr int DER_SIZE{294};      /**< Maximum DER encoding size */
+constexpr int HASH_SIZE{32};      /**< Hash size for HMAC (256 bits) */
+constexpr int EXPONENT{65537};
+constexpr int KEEP_ALIVE{60000};
+constexpr int SESSION_TIMEOUT{3000}; /**< Session timeout in milliseconds */
+
+// Static Cryptographic Contexts
+static mbedtls_aes_context aes_ctx;       /**< AES Context */
+static mbedtls_md_context_t hmac_ctx;     /**< HMAC Context */
+static mbedtls_pk_context client_key_ctx; /**< Client Public Key Context */
+static mbedtls_pk_context server_key_ctx; /**< Server Public Key Context */
+static mbedtls_entropy_context entropy;   /**< Entropy Context */
+static mbedtls_ctr_drbg_context ctr_drbg; /**< CTR DRBG Context */
+static mbedtls_sha256_context sha256_ctx;
+
+// Session Variables
+static uint32_t accessed = 0;                     /**< Last time the session was accessed */
+static uint64_t session_id = 0;                   /**< Session ID */
+static uint8_t aes_key[AES_SIZE] = {0};           /**< AES Key */
+static uint8_t enc_iv[AES_BLOCK_SIZE] = {0};      /**< Encryption IV */
+static uint8_t dec_iv[AES_BLOCK_SIZE] = {0};     /**< Decryption IV */
+static uint8_t buffer[DER_SIZE + RSA_SIZE] = {0}; /**< Temporary Buffer */
+
+// Security key
+static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e, 0x34, 0xb5,
+                                              0x2d, 0x22, 0xb5, 0xba, 0x4c, 0x34, 0x23, 0x3a,
+                                              0x9d, 0x3f, 0xe2, 0x97, 0x14, 0xbe, 0x24, 0x62,
+                                              0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
+
+
+static size_t client_read(uint8_t *buf, size_t blen)
 {
-    size_t length = communication_receive(buf, blen);
+    size_t lenght = communication_read(buf, blen);
 
-    if (length > HASH_SIZE)
+    if (lenght > HASH_SIZE)
     {
-        length -= HASH_SIZE;
+        lenght -= HASH_SIZE;
         uint8_t hmac[HASH_SIZE]{0};
         mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
-        mbedtls_md_hmac_update(&hmac_ctx, buf, length);
+        mbedtls_md_hmac_update(&hmac_ctx, buf, lenght);
         mbedtls_md_hmac_finish(&hmac_ctx, hmac);
-        if (memcmp(hmac, buf + length, HASH_SIZE) != 0)
+        if (0 != memcmp(hmac, buf + lenght, HASH_SIZE))
         {
-            length = 0; // Data integrity failed
+            lenght = 0;
         }
     }
     else
     {
-        length = 0; // Invalid message length
+        lenght = 0;
     }
 
-    return length;
+     return lenght;
 }
 
-/**
- * @brief Writes data with HMAC integrity check.
- *
- * @param buf Pointer to data buffer.
- * @param dlen Length of data.
- * @return True if data is sent successfully, false otherwise.
- */
-bool Session::client_send(uint8_t *buf, size_t dlen)
+static bool client_write(const uint8_t *buf, size_t dlen)
 {
+    if (dlen + HASH_SIZE > sizeof(buffer)) // Prevent buffer overflow
+    {
+        return false;
+    }
+
+    uint8_t hmac[HASH_SIZE]; //Store HMAC separately
+
+    //Generate HMAC without modifying `buf`
     mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
     mbedtls_md_hmac_update(&hmac_ctx, buf, dlen);
-    mbedtls_md_hmac_finish(&hmac_ctx, buf + dlen);
-    dlen += HASH_SIZE;
+    mbedtls_md_hmac_finish(&hmac_ctx, hmac); // HMAC is stored in `hmac` array
 
-    return communication_send(buf, dlen);
+    // Copy original data + HMAC to `buffer`
+    memcpy(buffer, buf, dlen);
+    memcpy(buffer + dlen, hmac, HASH_SIZE);
+
+    dlen += HASH_SIZE; //Update length to include HMAC
+
+    return communication_write(buffer, dlen) == dlen; //Ensure full write
 }
 
-/**
- * @brief Handles public key exchange between client and server.
- */
-void Session::exchange_public_keys(void)
+static void exchange_public_keys(void)
 {
     session_id = 0;
     size_t olen, length;
     bool status = false;
 }
 
-/**
- * @brief Writes data securely using AES encryption.
- *
- * @param data Pointer to data.
- * @param size Size of the data.
- * @return True if write is successful, false otherwise.
- */
-bool Session::session_write(const uint8_t *data, size_t size)
+static bool session_write(const uint8_t *data, size_t size)
 {
     bool status = false;
     return status;
-}
-
-/**
- * @brief Initializes the session.
- *
- * @return True if successful, false otherwise.
- */
-bool Session::session_init(void)
+} 
+bool session_init(void)
 {
     bool status = false;
     return status;
-}
-
-/**
- * @brief Establishes a secure session.
- *
- * @return True if successful, false otherwise.
- */
-bool Session::session_establish(void)
+}                                     
+bool session_establish(void)
 {
     return 0;
 }
-
-/**
- * @brief Processes incoming session requests.
- *
- * @return Request type.
- */
-int Session::session_request(void)
+int session_request(void) 
 {
     return 0;
 }
-
-/**
- * @brief Sends a response over the session.
- *
- * @param res Response data.
- * @param rlen Length of response data.
- * @return True if response is sent successfully, false otherwise.
- */
-bool Session::session_response(const uint8_t *res, size_t rlen)
+bool session_response(const uint8_t *res, size_t rlen)
 {
     size_t len = 1;
     uint8_t response[AES_BLOCK_SIZE] = {0};
     return session_write(response, len);
 }
 
-/**
- * @brief Closes the session.
- */
-void Session::session_close(void)
+void session_close(void)
 {
     session_id = 0;
-}
-
-/**
- * @brief Sends the temperature value over the session.
- *
- * @param temp Temperature value.
- * @return SESSION_OKAY if successful, otherwise SESSION_ERROR.
- */
-int Session::session_send_temperature(float temp)
-{
-    uint8_t temp_buf[sizeof(float)];
-    memcpy(temp_buf, &temp, sizeof(float));
-    return client_send(temp_buf, sizeof(temp_buf)) ? SESSION_OKAY : SESSION_ERROR;
-}
-
-/**
- * @brief Sends the relay state over the session.
- *
- * @param state Relay state (ON/OFF).
- * @return SESSION_OKAY if successful, otherwise SESSION_ERROR.
- */
-int Session::session_send_relay_state(uint8_t state)
-{
-    return client_send(&state, sizeof(state)) ? SESSION_OKAY : SESSION_ERROR;
 }

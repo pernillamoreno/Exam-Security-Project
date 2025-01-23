@@ -101,8 +101,13 @@ class ClientGui(QMainWindow):
         self.toggle_thread.start()
 
     def display_message(self, status, message):
-        """Display messages in the log area."""
-        self.log_area.append(message)
+   
+        if "Temperature" in message:
+            message = message.replace("Te", "Temp")  # REMOVE THIS 
+            self.log_area.append(f"<b>{message}</b>") 
+        else:
+            self.log_area.append(message)
+
 
     def close_session(self):
         """Handle the Close Session button click."""

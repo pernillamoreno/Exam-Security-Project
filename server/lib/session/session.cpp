@@ -18,8 +18,6 @@
 #include <mbedtls/entropy.h>
 #include <mbedtls/ctr_drbg.h>
 
-
-
 // Constants for Cryptographic Parameters
 constexpr int AES_SIZE{32};       /**< AES key size (256 bits) */
 constexpr int AES_BLOCK_SIZE{16}; /**< AES block size (128 bits) */
@@ -44,7 +42,7 @@ static uint32_t accessed = 0;                     /**< Last time the session was
 static uint64_t session_id = 0;                   /**< Session ID */
 static uint8_t aes_key[AES_SIZE] = {0};           /**< AES Key */
 static uint8_t enc_iv[AES_BLOCK_SIZE] = {0};      /**< Encryption IV */
-static uint8_t dec_iv[AES_BLOCK_SIZE] = {0};     /**< Decryption IV */
+static uint8_t dec_iv[AES_BLOCK_SIZE] = {0};      /**< Decryption IV */
 static uint8_t buffer[DER_SIZE + RSA_SIZE] = {0}; /**< Temporary Buffer */
 
 // Security key
@@ -54,86 +52,53 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
                                               0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
 
 
-static size_t client_read(uint8_t *buf, size_t blen)
+
+// Constructor to initialize communication interface
+Session::Session(Stream *stream)
 {
-    size_t lenght = communication_read(buf, blen);
-
-    if (lenght > HASH_SIZE)
-    {
-        lenght -= HASH_SIZE;
-        uint8_t hmac[HASH_SIZE]{0};
-        mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
-        mbedtls_md_hmac_update(&hmac_ctx, buf, lenght);
-        mbedtls_md_hmac_finish(&hmac_ctx, hmac);
-        if (0 != memcmp(hmac, buf + lenght, HASH_SIZE))
-        {
-            lenght = 0;
-        }
-    }
-    else
-    {
-        lenght = 0;
-    }
-
-     return lenght;
+    com = stream;
 }
 
-static bool client_write(const uint8_t *buf, size_t dlen)
+// Reads data from the serial communication (previously client_read)
+size_t Session::receive(uint8_t *buf, size_t blen)
 {
-    if (dlen + HASH_SIZE > sizeof(buffer)) // Prevent buffer overflow
-    {
-        return false;
-    }
-
-    uint8_t hmac[HASH_SIZE]; //Store HMAC separately
-
-    //Generate HMAC without modifying `buf`
-    mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
-    mbedtls_md_hmac_update(&hmac_ctx, buf, dlen);
-    mbedtls_md_hmac_finish(&hmac_ctx, hmac); // HMAC is stored in `hmac` array
-
-    // Copy original data + HMAC to `buffer`
-    memcpy(buffer, buf, dlen);
-    memcpy(buffer + dlen, hmac, HASH_SIZE);
-
-    dlen += HASH_SIZE; //Update length to include HMAC
-
-    return communication_write(buffer, dlen) == dlen; //Ensure full write
+    if (com == nullptr)
+        return 0; // Ensure serial interface is set
+    return com->readBytes(buf, blen);
 }
 
-static void exchange_public_keys(void)
+// Writes data to the serial communication (previously client_write)
+bool Session::send(const uint8_t *data, size_t len)
 {
-    session_id = 0;
-    size_t olen, length;
-    bool status = false;
+    if (com == nullptr)
+        return false; // Ensure serial interface is set
+    return (com->write(data, len) == len);
 }
 
-static bool session_write(const uint8_t *data, size_t size)
+int Session::exchange_keys()
 {
-    bool status = false;
-    return status;
-} 
-bool session_init(void)
+
+    return SESSION_OKAY;
+}
+int Session::session_init()
 {
-    bool status = false;
-    return status;
-}                                     
-bool session_establish(void)
+    return exchange_keys();
+}
+int Session::session_close()
 {
     return 0;
 }
-int session_request(void) 
+int Session::session_establish()
 {
     return 0;
 }
-bool session_response(const uint8_t *res, size_t rlen)
+int Session::session_send_temperature(float temp) 
 {
-    size_t len = 1;
-    uint8_t response[AES_BLOCK_SIZE] = {0};
-    return session_write(response, len);
+    uint8_t temp_buf[sizeof(float)];
+    memcpy(temp_buf, &temp, sizeof(float));
+    return send(temp_buf, sizeof(temp_buf)) ? SESSION_OKAY : SESSION_ERROR;
 }
-
-void session_close(void)
+int Session::session_send_relay_state(uint8_t state)
 {
-    session_id = 0;
+    return send(&state, sizeof(state)) ? SESSION_OKAY : SESSION_ERROR;
 }

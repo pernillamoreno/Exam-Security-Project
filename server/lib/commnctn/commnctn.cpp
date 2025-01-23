@@ -1,12 +1,12 @@
 /**
  * @file commnctn.cpp
  * @author Pernilla S S-Moreno hhh
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2025-01-09
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 #include "commnctn.h"
 #include <Arduino.h>
@@ -27,11 +27,16 @@ bool communication_write(const uint8_t *data, size_t dlen)
 
 size_t communication_read(uint8_t *buf, size_t blen)
 {
-    while (0 == Serial.available())
+    unsigned long startTime = millis();
+
+    // Wait for data, but only for a limited time (500ms)
+    while (Serial.available() == 0)
     {
-        ; /**< Wait until data is available */
+        if (millis() - startTime > 500) // 500ms timeout
+        {
+            return 0; // Exit if no data received
+        }
     }
 
-    return Serial.readBytes(buf, blen); /**< Read available bytes into the buffer */
+    return Serial.readBytes(buf, blen);
 }
-  

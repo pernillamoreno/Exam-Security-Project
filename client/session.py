@@ -21,18 +21,18 @@ class Session:
     def __init__(self, port):
         self.communication = Communication(port)
         self.relay_state = False  
-        self.session_id = bytes([0 * 8])  # ✅ Renamed from __SESSION_ID
+        self.session_id = bytes([0 * 8])  
 
         if not self.communication.communication_open():
             raise Exception("Failed to connect")
 
-        self.hmac_ctx = hashlib.sha256()  # ✅ Renamed from __HMAC_KEY
-        self.hmac_ctx.update(Session.secret_key)  # ✅ Updated name to match C++
+        self.hmac_ctx = hashlib.sha256() 
+        self.hmac_ctx.update(Session.secret_key)  
         self.hmac_ctx = self.hmac_ctx.digest()
         self.hmac_ctx = hmac.new(self.hmac_ctx, digestmod="SHA256")
 
         self.client_public_rsa = pk.RSA()
-        self.client_public_rsa.generate(Session.RSA_SIZE * 8, Session.EXPONENT)  # ✅ Renamed from __EXPONENT
+        self.client_public_rsa.generate(Session.RSA_SIZE * 8, Session.EXPONENT) 
 
     def toggle_relay(self):
         try:

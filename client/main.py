@@ -101,11 +101,6 @@ class ClientGui(QMainWindow):
         self.toggle_thread.start()
 
     def display_message(self, status, message):
-   
-        if "Temperature" in message:
-            message = message.replace("Te", "Temp")  # REMOVE THIS 
-            self.log_area.append(f"<b>{message}</b>") 
-        else:
             self.log_area.append(message)
 
 

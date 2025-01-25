@@ -66,7 +66,7 @@ private:
     static const uint8_t secret_key[HASH_SIZE];
 
     // Communication Interface
-    Stream *com;
+   Stream *com = nullptr;
 
     // Private Methods
     bool send(const uint8_t *data, size_t len);

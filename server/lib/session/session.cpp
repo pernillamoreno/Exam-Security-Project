@@ -51,8 +51,6 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
                                               0x9d, 0x3f, 0xe2, 0x97, 0x14, 0xbe, 0x24, 0x62,
                                               0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
 
-
-
 // Constructor to initialize communication interface
 Session::Session(Stream *stream)
 {
@@ -92,7 +90,7 @@ int Session::session_establish()
 {
     return 0;
 }
-int Session::session_send_temperature(float temp) 
+int Session::session_send_temperature(float temp)
 {
     uint8_t temp_buf[sizeof(float)];
     memcpy(temp_buf, &temp, sizeof(float));

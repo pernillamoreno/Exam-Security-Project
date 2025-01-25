@@ -17,7 +17,7 @@ void setup()
 {
   Serial.begin(115200);
   Serial.setRxBufferSize(1024); // Increase RX buffer size
-  delay(1000);
+  while (!Serial);
   Serial.println("ESP32 Server Starting...");
 
   pinMode(PIN_32, OUTPUT); // Relay pin

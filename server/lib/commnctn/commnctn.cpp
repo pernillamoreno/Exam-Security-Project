@@ -1,12 +1,12 @@
 /**
  * @file commnctn.cpp
  * @author Pernilla S S-Moreno hhh
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2025-01-09
- * 
+ *
  * @copyright Copyright (c) 2025
- * 
+ *
  */
 #include "commnctn.h"
 #include <Arduino.h>
@@ -20,9 +20,9 @@ bool communication_init(void)
     ;
 }
 
-bool communication_write(const uint8_t *data, size_t dlen)
+bool communication_write(const uint8_t *data, size_t len)
 {
-    return (dlen == Serial.write(data, dlen)); /**< Write the data to the Serial Communication */
+    return (len == Serial.write(data, len)); /**< Write the data to the Serial Communication */
 }
 
 size_t communication_read(uint8_t *buf, size_t blen)
@@ -34,4 +34,3 @@ size_t communication_read(uint8_t *buf, size_t blen)
 
     return Serial.readBytes(buf, blen); /**< Read available bytes into the buffer */
 }
-  

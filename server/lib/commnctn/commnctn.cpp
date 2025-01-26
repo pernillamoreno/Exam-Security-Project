@@ -27,10 +27,11 @@ bool communication_write(const uint8_t *data, size_t len)
 
 size_t communication_read(uint8_t *buf, size_t blen)
 {
-    while (0 == Serial.available())
+    unsigned long start_time = millis();
+    while (Serial.available() < blen)
     {
-        ; /**< Wait until data is available */
+        if (millis() - start_time > 500) 
+            return 0;
     }
-
-    return Serial.readBytes(buf, blen); /**< Read available bytes into the buffer */
+    return Serial.readBytes(buf, blen);
 }

@@ -1,5 +1,5 @@
 """
-    Client gui
+    Client GUI
 """
 
 import sys
@@ -9,8 +9,6 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import QThread, pyqtSignal
 import serial.tools.list_ports
 from session import Session
-
-
 
 
 class GetTemperatureThread(QThread):
@@ -45,7 +43,6 @@ class ClientGui(QMainWindow):
 
         # Initialize session
         self.session = Session("/dev/ttyUSB0")
-
 
         # Main layout
         self.central_widget = QWidget()
@@ -90,14 +87,24 @@ class ClientGui(QMainWindow):
 
     def handle_get_temperature(self):
         """Handle the Get Temperature button click."""
+        if hasattr(self, 'temp_thread') and self.temp_thread.isRunning():
+            return  # Prevent multiple clicks while operation is ongoing
+
+        self.get_temp_button.setEnabled(False)  # Disable button to prevent multiple fast clicks
         self.temp_thread = GetTemperatureThread(self.session)
         self.temp_thread.result.connect(self.display_message)
+        self.temp_thread.finished.connect(lambda: self.get_temp_button.setEnabled(True))  # Re-enable button
         self.temp_thread.start()
 
     def handle_toggle_relay(self):
         """Handle the Toggle Relay button click."""
+        if hasattr(self, 'toggle_thread') and self.toggle_thread.isRunning():
+            return  # Prevent multiple clicks while operation is ongoing
+
+        self.toggle_relay_button.setEnabled(False)
         self.toggle_thread = ToggleRelayThread(self.session)
         self.toggle_thread.result.connect(self.display_message)
+        self.toggle_thread.finished.connect(lambda: self.toggle_relay_button.setEnabled(True))  # Re-enable button
         self.toggle_thread.start()
 
     def display_message(self, status, message):
@@ -121,4 +128,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()

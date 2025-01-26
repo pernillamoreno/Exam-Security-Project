@@ -2,28 +2,21 @@
 #include "session.h"
 #include <Arduino.h>
 
-#define SESSION_ESTABLISH 0x01
+// Define macros
 #define TOGGLE_RELAY 0x03
 #define GET_TEMP 0x01
 #define LED_ON 0x01
 #define LED_OFF 0x00
 
-#define PIN_32 32 // Relay control pin (Relay)
-#define PIN_21 2  // ESP32 built-in LED
-
-Session session(&Serial); // Use Serial as communication interface
+// Define pin numbers
+#define PIN_32 32 // Relay control pin
+#define PIN_21 2  // ESP32 inbuilt LED
 
 void setup()
 {
-  Serial.begin(115200);
-  Serial.setRxBufferSize(1024); // Increase RX buffer size
-  while (!Serial);
-  Serial.println("ESP32 Server Starting...");
-
-  pinMode(PIN_32, OUTPUT); // Relay pin
-  pinMode(PIN_21, OUTPUT); // Debugging LED pin
-
-  communication_init(); // Initialize communication
+  pinMode(PIN_32, OUTPUT); // Set Pin 32 as an output (relay)
+  pinMode(PIN_21, OUTPUT); // Set Pin 2 as an output (for debugging)
+  communication_init();    // Initialize serial communication
 }
 
 void loop()
@@ -35,25 +28,29 @@ void loop()
   {
     if (command == TOGGLE_RELAY)
     {
-      // **Toggle LED (Relay)**
+      // Toggle relay state on Pin 32
       int currentState = digitalRead(PIN_32);
       int newState = !currentState;
       digitalWrite(PIN_32, newState);
 
-      // **Send LED status to client**
+      // Toggle PIN_21 (for debugging)
+      int currentState2 = digitalRead(PIN_21);
+      int newState2 = !currentState2;
+      digitalWrite(PIN_21, newState2);
+
+      // Send acknowledgment
       uint8_t response = (newState == HIGH) ? LED_ON : LED_OFF;
-      session.session_send_relay_state(response);
+      communication_write(&response, sizeof(response));
     }
     else if (command == GET_TEMP)
     {
-      float temperature = temperatureRead(); // Read temperature
+      // Use the correct built-in ESP32 function
+      float temperature = temperatureRead(); // Get temperature in Celsius
       char tempBuffer[10];
       dtostrf(temperature, 6, 2, tempBuffer); // Convert float to string
 
-      Serial.println("Sending Temperature to Client"); // Debugging
-      Serial.println(tempBuffer);                      // Debugging
-
-      communication_write((uint8_t *)tempBuffer, strlen(tempBuffer) + 1); // Send temperature string
+      // Send temperature as a string
+      communication_write((uint8_t *)tempBuffer, strlen(tempBuffer) + 1);
     }
   }
 }

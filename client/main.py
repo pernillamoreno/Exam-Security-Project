@@ -101,8 +101,8 @@ class ClientGui(QMainWindow):
         self.toggle_thread.start()
 
     def display_message(self, status, message):
-            self.log_area.append(message)
-
+        """Display messages in the log area."""
+        self.log_area.append(message)
 
     def close_session(self):
         """Handle the Close Session button click."""
@@ -121,5 +121,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-    
+    main() 

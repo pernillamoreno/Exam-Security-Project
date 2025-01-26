@@ -20,23 +20,17 @@ bool communication_init(void)
     ;
 }
 
-bool communication_write(const uint8_t *data, size_t dlen)
+bool communication_write(const uint8_t *data, size_t len)
 {
-    return (dlen == Serial.write(data, dlen)); /**< Write the data to the Serial Communication */
+    return (len == Serial.write(data, len)); /**< Write the data to the Serial Communication */
 }
 
 size_t communication_read(uint8_t *buf, size_t blen)
 {
-    unsigned long startTime = millis();
-
-    // Wait for data, but only for a limited time (500ms)
-    while (Serial.available() == 0)
+    while (0 == Serial.available())
     {
-        if (millis() - startTime > 500) // 500ms timeout
-        {
-            return 0; // Exit if no data received
-        }
+        ; /**< Wait until data is available */
     }
 
-    return Serial.readBytes(buf, blen);
+    return Serial.readBytes(buf, blen); /**< Read available bytes into the buffer */
 }

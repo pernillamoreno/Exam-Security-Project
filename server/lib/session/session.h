@@ -51,12 +51,12 @@ static constexpr int KEEP_ALIVE = 60000;
 static constexpr int AES_BLOCK_SIZE = 16;
 
 // Static Cryptographic Contexts
-static mbedtls_aes_context aes_ctx;       /**< AES Context */
-static mbedtls_md_context_t hmac_ctx;     /**< HMAC Context */
-static mbedtls_pk_context client_key_ctx; /**< Client Public Key Context */
-static mbedtls_pk_context server_key_ctx; /**< Server Public Key Context */
-static mbedtls_entropy_context entropy;   /**< Entropy Context */
-static mbedtls_ctr_drbg_context ctr_drbg; /**< CTR DRBG Context */
+static mbedtls_aes_context aes_ctx;      
+static mbedtls_md_context_t hmac_ctx;     
+static mbedtls_pk_context client_key_ctx; 
+static mbedtls_pk_context server_key_ctx; 
+static mbedtls_entropy_context entropy;   
+static mbedtls_ctr_drbg_context ctr_drbg; 
 static mbedtls_sha256_context sha256_ctx;
 
 // Function Prototypes
@@ -65,8 +65,7 @@ static size_t client_read(uint8_t *data, size_t len);        // First, read the 
 static bool client_write(const uint8_t *data, size_t dlen);  // Then, write data, dlen = lenght of data in he buffer
 static int exchange_keys();                                  // Exchange keys after reading and writing
 static bool session_write(const uint8_t *data, size_t size); // Write session-specific data, size = size of data to be written
-bool session_init(void);
-// Initialize the session (HMAC, AES, etc.)
+bool session_init(void);                                     // Initialize the session (HMAC, AES, etc.)
 bool session_establish(void);
 
 int session_close(); // Finally, close the session

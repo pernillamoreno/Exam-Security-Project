@@ -1,7 +1,4 @@
-"""
-    Client GUI
-"""
-
+import serial
 import sys
 from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
@@ -36,13 +33,13 @@ class ToggleRelayThread(QThread):
 
 
 class ClientGui(QMainWindow):
-    def __init__(self):
+    def __init__(self, port, baudrate):
         super().__init__()
         self.setWindowTitle("Client")
         self.setFixedSize(500, 400)
 
-        # Initialize session
-        self.session = Session("/dev/ttyUSB0")
+        # Initialize session with provided port and baudrate
+        self.session = Session(port, baudrate)
 
         # Main layout
         self.central_widget = QWidget()
@@ -86,16 +83,11 @@ class ClientGui(QMainWindow):
         self.clear_button.linkActivated.connect(self.clear_log)
 
     def handle_get_temperature(self):
-
-        self.get_temp_button.setEnabled(False)  # Disable button to prevent multiple fast clicks
         self.temp_thread = GetTemperatureThread(self.session)
         self.temp_thread.result.connect(self.display_message)
-        self.temp_thread.finished.connect(lambda: self.get_temp_button.setEnabled(True))  # Re-enable button
         self.temp_thread.start()
 
     def handle_toggle_relay(self):
-     
-
         self.toggle_relay_button.setEnabled(False)
         self.toggle_thread = ToggleRelayThread(self.session)
         self.toggle_thread.result.connect(self.display_message)
@@ -115,12 +107,18 @@ class ClientGui(QMainWindow):
         self.log_area.clear()
 
 
-def main():
+def main(port, baudrate):
     app = QApplication(sys.argv)
-    window = ClientGui()
+    window = ClientGui(port, baudrate)
     window.show()
     sys.exit(app.exec())
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) != 3:
+        print("Usage: python client_gui.py <serial_port> <baud_rate>")
+        sys.exit(1)
+
+    port = sys.argv[1]
+    baudrate = int(sys.argv[2])
+    main(port, baudrate)

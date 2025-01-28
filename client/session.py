@@ -18,8 +18,8 @@ class Session:
     STATUS_INVALID_SESSION = 5
     STATUS_CONNECTION_ERROR = 6
 
-    def __init__(self, port):
-        self.communication = Communication(port)
+    def __init__(self, port, baudrate):
+        self.communication = Communication(port, baudrate) 
         self.relay_state = False  
         self.session_id = bytes([0 * 8])  
 

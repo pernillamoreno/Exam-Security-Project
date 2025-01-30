@@ -41,9 +41,9 @@ class Session:
             raise Exception("Failed to send client's public key.")
 
         
-       # buffer = self.communication.communication_read(1024)      
-        #print(f"\nReceived Buffer Length: {len(buffer)} (Expected: {2 * Session.RSA_SIZE})")
-        #print(f"Received Buffer Hex: {buffer.hex()}")   # REMOVE THIS LATER
+        buffer = self.communication.communication_read(1024)      
+        print(f"\nReceived Buffer Length: {len(buffer)} (Expected: {2 * Session.RSA_SIZE})")
+        print(f"Received Buffer Hex: {buffer.hex()}")   # REMOVE THIS LATER
 
     def toggle_relay(self):
         try:

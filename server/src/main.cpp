@@ -8,7 +8,6 @@
 #define LED_ON 0x01
 #define LED_OFF 0x00
 
-
 #define PIN_32 32 // Relay control pin
 #define PIN_21 2  // ESP32 inbuilt LED
 

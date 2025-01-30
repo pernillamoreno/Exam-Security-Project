@@ -51,12 +51,12 @@ static constexpr int KEEP_ALIVE = 60000;
 static constexpr int AES_BLOCK_SIZE = 16;
 
 // Static Cryptographic Contexts
-static mbedtls_aes_context aes_ctx;      
-static mbedtls_md_context_t hmac_ctx;     
-static mbedtls_pk_context client_key_ctx; 
-static mbedtls_pk_context server_key_ctx; 
-static mbedtls_entropy_context entropy;   
-static mbedtls_ctr_drbg_context ctr_drbg; 
+static mbedtls_aes_context aes_ctx;
+static mbedtls_md_context_t hmac_ctx;
+static mbedtls_pk_context client_key_ctx;
+static mbedtls_pk_context server_key_ctx;
+static mbedtls_entropy_context entropy;
+static mbedtls_ctr_drbg_context ctr_drbg;
 static mbedtls_sha256_context sha256_ctx;
 
 // Function Prototypes

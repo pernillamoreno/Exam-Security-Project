@@ -32,19 +32,58 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
                                               0x9d, 0x3f, 0xe2, 0x97, 0x14, 0xbe, 0x24, 0x62,
                                               0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
 
-static size_t client_read(uint8_t *data, size_t blen)
+static size_t client_read(uint8_t *buf, size_t blen)
 {
-    return communication_read(data, blen) == blen;
+    size_t lenght = communication_read(buf, blen);
+
+    if (lenght > HASH_SIZE)
+    {
+        lenght -= HASH_SIZE;
+        uint8_t hmac[HASH_SIZE]{0};
+        mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
+        mbedtls_md_hmac_update(&hmac_ctx, buf, lenght);
+        mbedtls_md_hmac_finish(&hmac_ctx, hmac);
+        if (0 != memcmp(hmac, buf + lenght, HASH_SIZE))
+        {
+            lenght = 0;
+        }
+    }
+    else
+    {
+        lenght = 0;
+    }
+
+    return lenght;
 }
 
-static bool client_write(const uint8_t *data, size_t dlen)
+static bool client_write(const uint8_t *buf, size_t dlen)
 {
+    if (dlen + HASH_SIZE > sizeof(buffer)) // Prevent buffer overflow
+    {
+        return false;
+    }
 
-    return communication_write(data, dlen) == dlen; // Ensure full write
+    uint8_t hmac[HASH_SIZE]; // Store HMAC separately
+
+    // Generate HMAC without modifying `buf`
+    mbedtls_md_hmac_starts(&hmac_ctx, secret_key, HASH_SIZE);
+    mbedtls_md_hmac_update(&hmac_ctx, buf, dlen);
+    mbedtls_md_hmac_finish(&hmac_ctx, hmac); // HMAC is stored in `hmac` array
+
+    // Copy original data + HMAC to `buffer`
+    memcpy(buffer, buf, dlen);
+    memcpy(buffer + dlen, hmac, HASH_SIZE);
+
+    dlen += HASH_SIZE; // Update length to include HMAC
+
+    return communication_write(buffer, dlen) == dlen; // Ensure full write
 }
 
 static int exchange_keys()
 {
+
+
+
     return SESSION_OKAY;
 }
 
@@ -57,7 +96,6 @@ bool session_establish(void)
 {
     return 0;
 }
-
 static bool session_write(const uint8_t *data, size_t size)
 {
     bool status = false;

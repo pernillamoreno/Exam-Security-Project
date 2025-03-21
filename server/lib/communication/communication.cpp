@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2025
  *
  */
-#include "commnctn.h"
+#include "communication.h"
 #include <Arduino.h>
 
 #define BAUDRATE 115200

@@ -1,4 +1,4 @@
-#include "commnctn.h"
+#include "communication.h"
 #include "session.h"
 #include <Arduino.h>
 

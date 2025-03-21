@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2025
  *
  */
-#include "commnctn.h"
+#include "communication.h"
 #include "session.h"
 #include <Arduino.h>
 #include <mbedtls/md.h>
@@ -79,14 +79,44 @@ static bool client_write(const uint8_t *buf, size_t dlen)
     return communication_write(buffer, dlen) == dlen; // Ensure full write
 }
 
-static int exchange_keys()
+static void exchange_public_keys(void)
 {
+    session_id = 0;
+    size_t olen, length;
 
+    mbedtls_pk_init(&client_key_ctx);
+    uint8_t cipher[3 * RSA_SIZE + HASH_SIZE] = {0};
 
+    assert(0 == mbedtls_pk_parse_public_key(&client_key_ctx, buffer, DER_SIZE));
+    assert(MBEDTLS_PK_RSA == mbedtls_pk_get_type(&client_key_ctx));
 
-    return SESSION_OKAY;
+    assert(DER_SIZE == mbedtls_pk_write_pubkey_der(&server_key_ctx, buffer, DER_SIZE));
+
+    assert(0 == mbedtls_pk_encrypt(&client_key_ctx, buffer, DER_SIZE / 2, cipher,
+                                   &olen, RSA_SIZE, mbedtls_ctr_drbg_random, &ctr_drbg));
+
+    assert(0 == mbedtls_pk_encrypt(&client_key_ctx, buffer + DER_SIZE / 2, DER_SIZE / 2,
+                                   cipher + RSA_SIZE, &olen, RSA_SIZE, mbedtls_ctr_drbg_random, &ctr_drbg));
+
+    length = 2 * RSA_SIZE;
+    assert(client_write(cipher, length));
+
 }
+static bool session_write(const uint8_t *res, size_t size)
+{
+    bool status = false;
+    uint8_t response[AES_BLOCK_SIZE] = {0};
+    uint8_t cipher[AES_BLOCK_SIZE + HASH_SIZE] = {0};
 
+    memcpy(response, res, size);
+
+    if (0 == mbedtls_aes_crypt_cbc(&aes_ctx, MBEDTLS_AES_ENCRYPT, sizeof(response), enc_iv, response, cipher))
+    {
+        status = client_write(cipher, AES_BLOCK_SIZE);
+    }
+
+    return status;
+}
 bool session_init(void)
 {
     bool status = false;
@@ -96,13 +126,22 @@ bool session_establish(void)
 {
     return 0;
 }
-static bool session_write(const uint8_t *data, size_t size)
+bool session_response(bool success, const uint8_t *res, size_t rlen)
 {
-    bool status = false;
-    return status;
-}
+    size_t len = 1;
+    uint8_t response[AES_BLOCK_SIZE] = {0};
 
-int session_close()
+    response[0] = success ? STATUS_OKAY : STATUS_ERROR;
+
+    if ((res != nullptr) && (rlen > 0))
+    {
+        memcpy(response + len, res, rlen);
+        len += rlen;
+    }
+
+    return session_write(response, len);
+}
+    int session_close()
 {
     return 0;
 }

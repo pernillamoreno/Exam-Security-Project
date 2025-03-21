@@ -34,6 +34,8 @@ enum
 
 enum
 {
+    STATUS_OKAY,
+    STATUS_ERROR,
     STATUS_EXPIRED,
     STATUS_HASH_ERROR,
     STATUS_BAD_REQUEST,
@@ -63,11 +65,11 @@ static mbedtls_sha256_context sha256_ctx;
 
 static size_t client_read(uint8_t *data, size_t len);        // First, read the data, blen= max lenght of buffer
 static bool client_write(const uint8_t *data, size_t dlen);  // Then, write data, dlen = lenght of data in he buffer
-static int exchange_keys();                                  // Exchange keys after reading and writing
+static void exchange_public_keys(void);                      // Exchange keys after reading and writing
 static bool session_write(const uint8_t *data, size_t size); // Write session-specific data, size = size of data to be written
 bool session_init(void);                                     // Initialize the session (HMAC, AES, etc.)
 bool session_establish(void);
-
+bool session_response(bool success, const uint8_t *res, size_t rlen);
 int session_close(); // Finally, close the session
 int session_send_temperature(float temp);
 int session_send_relay_state(uint8_t state);

@@ -1,124 +1,110 @@
 import serial
 import sys
-from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QWidget, QLabel
-)
-from PyQt6.QtCore import QThread, pyqtSignal
-import serial.tools.list_ports
 from session import Session
+from PyQt6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QWidget, QTextEdit
 
+class ClientWindow(QMainWindow):
+    __TEMPERATURE = 1
+    __TOGGLE_RELAY = 2
 
-class GetTemperatureThread(QThread):
-    result = pyqtSignal(int, str)
+    def __init__(self, port, baud):
+        try:
+            self.__session = Session(port, baud)
+        except:
+            print("Failed to create the session ...")
+            sys.exit(1)
 
-    def __init__(self, session):
         super().__init__()
-        self.session = session
 
-    def run(self):
-        status, message = self.session.get_temperature()
-        self.result.emit(status, message)
-
-
-class ToggleRelayThread(QThread):
-    result = pyqtSignal(int, str)
-
-    def __init__(self, session):
-        super().__init__()
-        self.session = session
-
-    def run(self):
-        status, message = self.session.toggle_relay()
-        self.result.emit(status, message)
-
-
-class ClientGui(QMainWindow):
-    def __init__(self, port, baudrate):
-        super().__init__()
         self.setWindowTitle("Client")
-        self.setFixedSize(500, 400)
+        self.setFixedSize(500, 500)
 
-        # Initialize session with provided port and baudrate
-        self.session = Session(port, baudrate)
+        main_layout = QVBoxLayout()
 
-        # Main layout
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
-        self.main_layout = QVBoxLayout()
-        self.main_layout.setContentsMargins(10, 10, 10, 10)
-        self.main_layout.setSpacing(10)
+        button_layout = QHBoxLayout()
 
-        self.button_layout = QHBoxLayout()
+        self.__session_button = QPushButton("Establish Session", self)
+        self.__session_button.setFixedSize(150, 30)
+        self.__session_button.clicked.connect(self.__toggleSession)
+        button_layout.addWidget(self.__session_button)
 
-        # Buttons
-        self.close_session_button = QPushButton("Close Session")
-        self.get_temp_button = QPushButton("Get Temperature")
-        self.toggle_relay_button = QPushButton("Toggle Relay")
-        self.clear_button = QLabel("<a href='#'>Clear</a>")
-        self.clear_button.setStyleSheet("color: blue; text-decoration: underline;")
-        self.clear_button.setOpenExternalLinks(False)
+        self.__temp_button = QPushButton("Get Temperature", self)
+        self.__temp_button.clicked.connect(self.__getTemperature)
+        self.__temp_button.setDisabled(True)
+        button_layout.addWidget(self.__temp_button)
 
-        # Add buttons to horizontal layout
-        self.button_layout.addWidget(self.close_session_button)
-        self.button_layout.addWidget(self.get_temp_button)
-        self.button_layout.addWidget(self.toggle_relay_button)
-        self.button_layout.addStretch()
-        self.button_layout.addWidget(self.clear_button)
+        self.__relay_button = QPushButton("Toggle Relay", self)
+        self.__relay_button.clicked.connect(self.__toggleRelay)
+        self.__relay_button.setDisabled(True)
+        button_layout.addWidget(self.__relay_button)
 
-        # Text area
-        self.log_area = QTextEdit()
-        self.log_area.setReadOnly(True)
-        self.log_area.setStyleSheet("background-color: black; color: white; font-size: 12px;")
+        self.clear_log_label = QLabel("Clear", self)
+        self.clear_log_label.setStyleSheet("color: blue; text-decoration: underline; cursor: pointer;")
+        self.clear_log_label.mousePressEvent = self.__clearLog
+        button_layout.addWidget(self.clear_log_label)
 
-        # Add layouts to the main
-        self.main_layout.addLayout(self.button_layout)
-        self.main_layout.addWidget(self.log_area)
+        main_layout.addLayout(button_layout)
 
-        self.central_widget.setLayout(self.main_layout)
+        self.__log = QTextEdit(self)
+        self.__log.setReadOnly(True)
+        self.__log.setStyleSheet("background-color: black; color: white; border: 1px solid white;")
+        self.__log.setCursorWidth(0)
+        main_layout.addWidget(self.__log)
 
-        # Connect button clicks
-        self.close_session_button.clicked.connect(self.close_session)
-        self.get_temp_button.clicked.connect(self.handle_get_temperature)
-        self.toggle_relay_button.clicked.connect(self.handle_toggle_relay)
-        self.clear_button.linkActivated.connect(self.clear_log)
+        container = QWidget()
+        container.setLayout(main_layout)
+        self.setCentralWidget(container)
 
-    def handle_get_temperature(self):
-        self.temp_thread = GetTemperatureThread(self.session)
-        self.temp_thread.result.connect(self.display_message)
-        self.temp_thread.start()
+    def __toggleSession(self):
+        self.__session_button.setText("Wait ...")
+        if self.__session:
+            if self.__session.terminate():
+                self.__session_button.setText("Establish Session")
+                self.__log.append("Session Close: Done")
+                self.__temp_button.setDisabled(True)
+                self.__relay_button.setDisabled(True)
+            else:
+                self.__session_button.setText("Close Session")
+                self.__log.append("Session Close: Failed")
+        else:
+            if self.__session.establish():
+                self.__session_button.setText("Close Session")
+                self.__log.append("Session Establish: Done")
+                self.__temp_button.setDisabled(False)
+                self.__relay_button.setDisabled(False)
+            else:
+                self.__session_button.setText("Establish Session")
+                self.__log.append("Session Establish: Failed")
 
-    def handle_toggle_relay(self):
-        self.toggle_relay_button.setEnabled(False)
-        self.toggle_thread = ToggleRelayThread(self.session)
-        self.toggle_thread.result.connect(self.display_message)
-        self.toggle_thread.finished.connect(lambda: self.toggle_relay_button.setEnabled(True))  # Re-enable button
-        self.toggle_thread.start()
-
-    def display_message(self, status, message):
-        """Display messages in the log area."""
-        self.log_area.append(message)
-
-    def close_session(self):
-        """Handle the Close Session button click."""
-        self.log_area.append("Session Closed")
-
-    def clear_log(self):
-        """Clear the log area."""
-        self.log_area.clear()
+    def __getTemperature(self):
+        temp = bytearray()
+        status = self.__session.request(ClientWindow.__TEMPERATURE, temp)
+        if status == Session.OKAY:
+            self.__log.append(f"Temperature: {temp} °C")
+        elif status == Session.EXPIRED:
+            self.__log.append("Session Error: Expired")
+            self.__session_button.setText("Establish Session")
+            self.__temp_button.setDisabled(True)
+            self.__relay_button.setDisabled(True)
+        else:
+            self.__log.append("Temperature: Error")
 
 
-def main(port, baudrate):
-    app = QApplication(sys.argv)
-    window = ClientGui(port, baudrate)
-    window.show()
-    sys.exit(app.exec())
+    def __toggleRelay(self):
+        pass
 
+    def __clearLog(self):
+        self.__log.clear()
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python client_gui.py <serial_port> <baud_rate>")
+    if len(sys.argv) < 3:
+        print("Usage: main.py <serial_port> <baud_rate>")
         sys.exit(1)
 
-    port = sys.argv[1]
-    baudrate = int(sys.argv[2])
-    main(port, baudrate)
+    serial_port = sys.argv[1]
+    baud_rate = int(sys.argv[2])
+
+    app = QApplication(sys.argv)
+    window = ClientWindow(serial_port, baud_rate)
+    window.show()
+    sys.exit(app.exec())

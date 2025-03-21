@@ -1,4 +1,3 @@
-import serial
 import sys
 from session import Session
 from PyQt6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QWidget, QTextEdit
@@ -10,7 +9,8 @@ class ClientWindow(QMainWindow):
     def __init__(self, port, baud):
         try:
             self.__session = Session(port, baud)
-        except:
+        except Exception as exp:
+            print(exp)
             print("Failed to create the session ...")
             sys.exit(1)
 

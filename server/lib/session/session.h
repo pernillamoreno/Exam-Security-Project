@@ -43,31 +43,7 @@ enum
     STATUS_CONNECTION_ERROR
 };
 
-// Constants for Cryptographic Parameters
-static constexpr int AES_SIZE = 32;
-static constexpr int DER_SIZE = 294;
-static constexpr int RSA_SIZE = 256;
-static constexpr int HASH_SIZE = 32;
-static constexpr int EXPONENT = 65537;
-static constexpr int KEEP_ALIVE = 60000;
-static constexpr int AES_BLOCK_SIZE = 16;
-
-// Static Cryptographic Contexts
-static mbedtls_aes_context aes_ctx;
-static mbedtls_md_context_t hmac_ctx;
-static mbedtls_pk_context client_key_ctx;
-static mbedtls_pk_context server_key_ctx;
-static mbedtls_entropy_context entropy;
-static mbedtls_ctr_drbg_context ctr_drbg;
-static mbedtls_sha256_context sha256_ctx;
-
-// Function Prototypes
-
-static size_t client_read(uint8_t *data, size_t len);        // First, read the data, blen= max lenght of buffer
-static bool client_write(const uint8_t *data, size_t dlen);  // Then, write data, dlen = lenght of data in he buffer
-static void exchange_public_keys(void);                      // Exchange keys after reading and writing
-static bool session_write(const uint8_t *data, size_t size); // Write session-specific data, size = size of data to be written
-bool session_init(void);                                     // Initialize the session (HMAC, AES, etc.)
+bool session_init(void); // Initialize the session (HMAC, AES, etc.)
 bool session_establish(void);
 bool session_response(bool success, const uint8_t *res, size_t rlen);
 int session_close(); // Finally, close the session

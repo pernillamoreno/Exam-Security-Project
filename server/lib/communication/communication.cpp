@@ -17,7 +17,6 @@ bool communication_init(void)
 {
     Serial.begin(BAUDRATE);
     return Serial ? true : false;
-    ;
 }
 
 bool communication_write(const uint8_t *data, size_t len)
@@ -27,11 +26,9 @@ bool communication_write(const uint8_t *data, size_t len)
 
 size_t communication_read(uint8_t *buf, size_t blen)
 {
-    unsigned long start_time = millis();
-    while (Serial.available() < blen)
+    while (0 == Serial.available())
     {
-        if (millis() - start_time > 500) 
-            return 0;
+        ;
     }
     return Serial.readBytes(buf, blen);
 }

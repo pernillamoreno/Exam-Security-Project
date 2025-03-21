@@ -8,15 +8,40 @@
  * @copyright Copyright (c) 2025
  *
  */
-#include "communication.h"
 #include "session.h"
 #include <Arduino.h>
 #include <mbedtls/md.h>
 #include <mbedtls/pk.h>
 #include <mbedtls/rsa.h>
 #include <mbedtls/aes.h>
+#include "communication.h"
 #include <mbedtls/entropy.h>
 #include <mbedtls/ctr_drbg.h>
+
+// Constants for Cryptographic Parameters
+static constexpr int AES_SIZE = 32;
+static constexpr int DER_SIZE = 294;
+static constexpr int RSA_SIZE = 256;
+static constexpr int HASH_SIZE = 32;
+static constexpr int EXPONENT = 65537;
+static constexpr int KEEP_ALIVE = 60000;
+static constexpr int AES_BLOCK_SIZE = 16;
+
+// Static Cryptographic Contexts
+static mbedtls_aes_context aes_ctx;
+static mbedtls_md_context_t hmac_ctx;
+static mbedtls_pk_context client_key_ctx;
+static mbedtls_pk_context server_key_ctx;
+static mbedtls_entropy_context entropy;
+static mbedtls_ctr_drbg_context ctr_drbg;
+static mbedtls_sha256_context sha256_ctx;
+
+// Function Prototypes
+
+static size_t client_read(uint8_t *data, size_t len);        // First, read the data, blen= max lenght of buffer
+static bool client_write(const uint8_t *data, size_t dlen);  // Then, write data, dlen = lenght of data in he buffer
+static void exchange_public_keys(void);                      // Exchange keys after reading and writing
+static bool session_write(const uint8_t *data, size_t size); // Write session-specific data, size = size of data to be written
 
 // Session Variables
 static uint32_t accessed = 0;                     /**< Last time the session was accessed */
@@ -100,8 +125,8 @@ static void exchange_public_keys(void)
 
     length = 2 * RSA_SIZE;
     assert(client_write(cipher, length));
-
 }
+
 static bool session_write(const uint8_t *res, size_t size)
 {
     bool status = false;
@@ -117,11 +142,43 @@ static bool session_write(const uint8_t *res, size_t size)
 
     return status;
 }
+
 bool session_init(void)
 {
-    bool status = false;
+    bool status{false};
+
+    if (communication_init())
+    {
+        // RNG Initialization
+        mbedtls_entropy_init(&entropy);
+        mbedtls_ctr_drbg_init(&ctr_drbg);
+        for (size_t i = 0; i < sizeof(aes_key); i++)
+        {
+            aes_key[i] = random(256);
+        }
+
+        if (0 == mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, aes_key, sizeof(aes_key)))
+        {
+            // HMAC-SHA256
+            mbedtls_md_init(&hmac_ctx);
+            if (0 == mbedtls_md_setup(&hmac_ctx, mbedtls_md_info_from_type(MBEDTLS_MD_SHA256), 1))
+            {
+                // AES-256
+                mbedtls_aes_init(&aes_ctx);
+
+                // RSA-2048
+                mbedtls_pk_init(&server_key_ctx);
+                if (0 == mbedtls_pk_setup(&server_key_ctx, mbedtls_pk_info_from_type(MBEDTLS_PK_RSA)))
+                {
+                    status = (0 == mbedtls_rsa_gen_key(mbedtls_pk_rsa(server_key_ctx), mbedtls_ctr_drbg_random, &ctr_drbg, RSA_SIZE * CHAR_BIT, EXPONENT));
+                }
+            }
+        }
+    }
+
     return status;
 }
+
 bool session_establish(void)
 {
     return 0;
@@ -141,7 +198,7 @@ bool session_response(bool success, const uint8_t *res, size_t rlen)
 
     return session_write(response, len);
 }
-    int session_close()
+int session_close()
 {
     return 0;
 }

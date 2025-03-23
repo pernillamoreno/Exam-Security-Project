@@ -34,6 +34,15 @@ static const uint8_t secret_key[HASH_SIZE] = {0x29, 0x49, 0xde, 0xc2, 0x3e, 0x1e
                                               0xba, 0x4c, 0x34, 0x23, 0x3a, 0x9d, 0x3f, 0xe2, 0x97, 0x14, 0xbe,
                                               0x24, 0x62, 0x81, 0x0c, 0x86, 0xb1, 0xf6, 0x92, 0x54, 0xd6};
 
+static void on_error(void)
+{
+    digitalWrite(GPIO_NUM_32, HIGH);
+    while (1)
+    {
+        ;
+    }
+}
+
 static size_t client_read(uint8_t *buf, size_t blen)
 {
     size_t length = communication_read(buf, blen);
@@ -83,7 +92,7 @@ static int exchange_public_keys(void)
     {
         if (MBEDTLS_PK_RSA == mbedtls_pk_get_type(&client_key_ctx))
         {
-            if (DER_SIZE == mbedtls_pk_write_key_der(&server_key_ctx, buffer, DER_SIZE))
+            if (DER_SIZE == mbedtls_pk_write_pubkey_der(&server_key_ctx, buffer, DER_SIZE))
             {
                 if (0 == mbedtls_pk_encrypt(&client_key_ctx, buffer, DER_SIZE / 2, cipher, &len, RSA_SIZE, mbedtls_ctr_drbg_random, &ctr_drbg))
                 {
@@ -100,16 +109,17 @@ static int exchange_public_keys(void)
     {
         status = SESSION_ERROR;
     }
-
+    
     if (status == SESSION_OKAY)
     {
         status = SESSION_ERROR;
         length = client_read(cipher, sizeof(cipher));
-
+        
         if (length == 3 * RSA_SIZE)
         {
             if (0 == mbedtls_pk_encrypt(&server_key_ctx, cipher, RSA_SIZE, buffer, &len, RSA_SIZE, mbedtls_ctr_drbg_random, &ctr_drbg))
             {
+                on_error();
                 length = len;
                 if (0 == mbedtls_pk_encrypt(&server_key_ctx, cipher + RSA_SIZE, RSA_SIZE, buffer + length, &len, RSA_SIZE, mbedtls_ctr_drbg_random, &ctr_drbg))
                 {
@@ -189,10 +199,10 @@ bool session_init(void)
                 mbedtls_aes_init(&aes_ctx);
 
                 mbedtls_pk_init(&server_key_ctx);
+
                 if (mbedtls_pk_setup(&server_key_ctx, mbedtls_pk_info_from_type(MBEDTLS_PK_RSA)) == 0)
                 {
-                    status = (mbedtls_rsa_gen_key(mbedtls_pk_rsa(server_key_ctx), mbedtls_ctr_drbg_random,
-                                                  &ctr_drbg, RSA_SIZE * 8, EXPONENT) == 0);
+                    status = (mbedtls_rsa_gen_key(mbedtls_pk_rsa(server_key_ctx), mbedtls_ctr_drbg_random, &ctr_drbg, RSA_SIZE * 8, EXPONENT) == 0);
                 }
             }
         }

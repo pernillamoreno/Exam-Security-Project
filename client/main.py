@@ -1,10 +1,11 @@
 import sys
+import struct
 from session import Session
 from PyQt6.QtWidgets import QApplication, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, QLabel, QWidget, QTextEdit
 
 class ClientWindow(QMainWindow):
     __TEMPERATURE = 1
-    __TOGGLE_RELAY = 2
+    __TOGGLE_RELAY = 3
 
     def __init__(self, port, baud):
         try:
@@ -57,7 +58,8 @@ class ClientWindow(QMainWindow):
 
     def __toggleSession(self):
         self.__session_button.setText("Wait ...")
-        if self.__session:
+
+        if self.__session.is_established():
             if self.__session.terminate():
                 self.__session_button.setText("Establish Session")
                 self.__log.append("Session Close: Done")
@@ -79,8 +81,16 @@ class ClientWindow(QMainWindow):
     def __getTemperature(self):
         temp = bytearray()
         status = self.__session.request(ClientWindow.__TEMPERATURE, temp)
+
         if status == Session.OKAY:
-            self.__log.append(f"Temperature: {temp} °C")
+            try:
+                if len(temp) >= 4:
+                    temperature = struct.unpack('<f', temp[:4])[0]
+                    self.__log.append(f"Temperature: {temperature:.2f} °C")
+                else:
+                    self.__log.append("Temperature Error: Not enough data")
+            except struct.error as e:
+                self.__log.append(f"Temperature Decode Error: {e}")
         elif status == Session.EXPIRED:
             self.__log.append("Session Error: Expired")
             self.__session_button.setText("Establish Session")
@@ -89,9 +99,18 @@ class ClientWindow(QMainWindow):
         else:
             self.__log.append("Temperature: Error")
 
-
     def __toggleRelay(self):
-        pass
+        state = bytearray()
+        status = self.__session.request(ClientWindow.__TOGGLE_RELAY, state)
+        if status == Session.OKAY:
+            self.__log.append(f"Relay toggled. New state: {'ON' if state[0] else 'OFF'}")
+        elif status == Session.EXPIRED:
+            self.__log.append("Session Error: Expired")
+            self.__session_button.setText("Establish Session")
+            self.__temp_button.setDisabled(True)
+            self.__relay_button.setDisabled(True)
+        else:
+            self.__log.append("Toggle Relay: Error")
 
     def __clearLog(self):
         self.__log.clear()

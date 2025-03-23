@@ -65,7 +65,6 @@ class Session:
             buffer = b''
         return buffer
 
-
     def __send(self, buf: bytes) -> bool:
         self.__hmac.update(buf)
         buf += self.__hmac.digest()
@@ -73,7 +72,10 @@ class Session:
     
     def __bool__(self) -> bool:
         return (0 == int.from_bytes(self.__SESSION_ID, 'little'))
-    
+
+    def is_established(self) -> bool:
+        return int.from_bytes(self.__SESSION_ID, 'little') != 0
+
     def establish(self) -> bool:
         status = False
         self.__SESSION_ID = bytes(8 * [0])
@@ -83,13 +85,13 @@ class Session:
             buffer = self.__serverRSA.encrypt(buffer[0:Session.__RSA_SIZE//2]) + self.__serverRSA.encrypt(buffer[Session.__RSA_SIZE//2:Session.__RSA_SIZE])
 
             if self.__send(buffer):
-               buffer = self.__receive(Session.__RSA_SIZE)
-               if 0 < len(buffer):
-                   buffer = self.__clientRSA.decrypt(buffer)
-                   self.__SESSION_ID = buffer[0:8]
-                   if 0 != int.from_bytes(self.__SESSION_ID, 'little'):
-                       self.__AES = cipher.AES.new(buffer[8:40], buffer[40:56])
-                       status = True
+                buffer = self.__receive(Session.__RSA_SIZE)
+                if 0 < len(buffer):
+                    buffer = self.__clientRSA.decrypt(buffer)
+                    self.__SESSION_ID = buffer[0:8]
+                    if 0 != int.from_bytes(self.__SESSION_ID, 'little'):
+                        self.__AES = cipher.AES.new(buffer[8:40], cipher.MODE_CBC, buffer[40:56])
+                        status = True
         except Exception as e:
             print(f"Error during session establishment: {e}")
 
@@ -118,5 +120,3 @@ class Session:
     
     def __del__(self):
         self.terminate()
-    
-        

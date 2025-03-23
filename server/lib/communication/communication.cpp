@@ -1,6 +1,6 @@
 /**
- * @file commnctn.cpp
- * @author Pernilla S S-Moreno hhh
+ * @file communication.cpp
+ * @author Pernilla S S-Moreno
  * @brief
  * @version 0.1
  * @date 2025-01-09

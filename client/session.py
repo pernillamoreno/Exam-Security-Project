@@ -4,7 +4,7 @@ from mbedtls import pk, hmac, hashlib, cipher
 class Session:
     __RSA_SIZE = 256
     __EXPONENT = 65537
-    __SECRET_KEY = b'Fj2-;wu3Ur=ARl2!Tqi6IuKM3nG]8z1+'
+    __SECRET_KEY = b"Fj2-;wu3Ur=ARl2!Tqi6IuKM3nG]8z1+"
 
     OKAY = 0
     ERROR = 1
@@ -29,8 +29,9 @@ class Session:
 
         if not self.__send(self.__clientRSA.export_public_key()):
             raise Exception("1) Failed to exchange keys")
-        
+            
         buffer = self.__receive(2 * Session.__RSA_SIZE)
+        print("Received server key length:", len(buffer))
         if 0 == len(buffer):
             raise Exception("2) Failed to exchange keys")
         

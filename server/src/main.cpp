@@ -1,44 +1,64 @@
-#include "communication.h"
-#include "session.h"
 #include <Arduino.h>
+#include "session.h"
 
-// Define macros
-#define TOGGLE_RELAY 0x03
-#define GET_TEMP 0x01
-#define LED_ON 0x01
-#define LED_OFF 0x00
-
-#define PIN_32 32 // Relay control pin
-#define PIN_21 2  // ESP32 inbuilt LED
+#define RELAY_PIN GPIO_NUM_32
 
 void setup()
 {
-  pinMode(PIN_32, OUTPUT); // Set Pin 32 as an output (relay)
-  pinMode(PIN_21, OUTPUT); // Set Pin 2 as an output (for debugging)
-  communication_init();    // Initialize serial communication
-  Serial.setTimeout(50);
+  pinMode(RELAY_PIN, OUTPUT);
+  pinMode(21, OUTPUT);
+
+  if (!session_init())
+  {
+    while (1)
+    {
+      digitalWrite(21, HIGH);
+      delay(200);
+      digitalWrite(21, LOW);
+      delay(200);
+    }
+  }
 }
+
 void loop()
 {
-  uint8_t command = 0;
-  size_t len = Serial.readBytes((char *)&command, 1); // Read 1 byte with timeout
+  int req = session_request();
 
-  if (len > 0) // Only process if data was received
+  switch (req)
   {
-    if (command == TOGGLE_RELAY)
-    {
-      int currentState = digitalRead(PIN_32);
-      digitalWrite(PIN_32, !currentState);
+  case SESSION_ESTABLISH:
+    session_establish();
+    break;
 
-      uint8_t response = (!currentState) ? LED_ON : LED_OFF;
-      communication_write(&response, sizeof(response));
-    }
-    else if (command == GET_TEMP)
+  case SESSION_CLOSE:
+    session_close();
+    break;
+
+  case SESSION_GET_TEMP:
+    session_send_temperature(temperatureRead());
+    break;
+
+  case SESSION_TOGGLE_RELAY:
+  {
+    static uint8_t state = LOW;
+    state = (state == LOW) ? HIGH : LOW;
+    digitalWrite(RELAY_PIN, state);
+    session_send_relay_state(state);
+    break;
+  }
+
+  default:
+    break;
+  }
+
+  if (req == SESSION_ERROR)
+  {
+    while (1)
     {
-      float temperature = temperatureRead();
-      char tempBuffer[10];
-      dtostrf(temperature, 6, 2, tempBuffer);
-      communication_write((uint8_t *)tempBuffer, strlen(tempBuffer) + 1);
+      digitalWrite(21, HIGH);
+      delay(200);
+      digitalWrite(21, LOW);
+      delay(200);
     }
   }
 }

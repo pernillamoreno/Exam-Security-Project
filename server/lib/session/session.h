@@ -27,6 +27,7 @@ enum
     SESSION_GET_TEMP,
     SESSION_ESTABLISH,
     SESSION_TOGGLE_RELAY,
+
     SESSION_OKAY,
     SESSION_ERROR,
     SESSION_WARNING
@@ -36,17 +37,15 @@ enum
 {
     STATUS_OKAY,
     STATUS_ERROR,
-    STATUS_EXPIRED,
-    STATUS_HASH_ERROR,
-    STATUS_BAD_REQUEST,
-    STATUS_INVALID_SESSION,
-    STATUS_CONNECTION_ERROR
+    STATUS_EXPIRED
 };
 
 bool session_init(void); // Initialize the session (HMAC, AES, etc.)
-bool session_establish(void);
-bool session_response(bool success, const uint8_t *res, size_t rlen);
+int session_establish(void);
+int session_request(void);
 int session_close(); // Finally, close the session
+int session_send_error(void);
 int session_send_temperature(float temp);
 int session_send_relay_state(uint8_t state);
+
 #endif /* SESSION_H */

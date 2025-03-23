@@ -38,10 +38,10 @@ class ClientWindow(QMainWindow):
         self.__relay_button.setDisabled(True)
         button_layout.addWidget(self.__relay_button)
 
-        self.clear_log_label = QLabel("Clear", self)
-        self.clear_log_label.setStyleSheet("color: blue; text-decoration: underline; cursor: pointer;")
-        self.clear_log_label.mousePressEvent = self.__clearLog
-        button_layout.addWidget(self.clear_log_label)
+        self.clear_log_button = QPushButton("Clear", self)
+        self.clear_log_button.setStyleSheet("color: blue; text-decoration: underline;")
+        self.clear_log_button.clicked.connect(self.__clearLog)
+        button_layout.addWidget(self.clear_log_button)
 
         main_layout.addLayout(button_layout)
 

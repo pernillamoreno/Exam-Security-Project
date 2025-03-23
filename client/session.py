@@ -78,17 +78,20 @@ class Session:
         status = False
         self.__SESSION_ID = bytes(8 * [0])
 
-        buffer = self.__clientRSA.sign(self.__SECRET_KEY, "SHA256")
-        buffer = self.__serverRSA.encrypt(buffer[0:Session.__RSA_SIZE//2]) + self.__serverRSA.encrypt(buffer[Session.__RSA_SIZE//2:Session.__RSA_SIZE])
+        try:
+            buffer = self.__clientRSA.sign(self.__SECRET_KEY, "SHA256")
+            buffer = self.__serverRSA.encrypt(buffer[0:Session.__RSA_SIZE//2]) + self.__serverRSA.encrypt(buffer[Session.__RSA_SIZE//2:Session.__RSA_SIZE])
 
-        if self.__send(buffer):
-            buffer = self.__receive(Session.__RSA_SIZE)
-            if 0 < len(buffer):
-                buffer = self.__clientRSA.decrypt(buffer)
-                self.__SESSION_ID = buffer[0:8]
-                if 0 != int.from_bytes(self.__SESSION_ID, 'little'):
-                    self.__AES = cipher.AES.new(buffer[8:40], buffer[40:56])
-                    status = True
+            if self.__send(buffer):
+               buffer = self.__receive(Session.__RSA_SIZE)
+               if 0 < len(buffer):
+                   buffer = self.__clientRSA.decrypt(buffer)
+                   self.__SESSION_ID = buffer[0:8]
+                   if 0 != int.from_bytes(self.__SESSION_ID, 'little'):
+                       self.__AES = cipher.AES.new(buffer[8:40], buffer[40:56])
+                       status = True
+        except Exception as e:
+            print(f"Error during session establishment: {e}")
 
         return status
     

@@ -1,41 +1,52 @@
 #include <Arduino.h>
 #include "session.h"
 
-#define RELAY_PIN GPIO_NUM_32
+// Pin definitions
+constexpr int RELAY_PIN = GPIO_NUM_32;
+constexpr int LED_PIN = GPIO_NUM_21;
+
+static void set_error(bool error)
+{
+  while (error)
+  {
+    digitalWrite(LED_PIN, LOW);
+    delay(500);
+    digitalWrite(LED_PIN, HIGH);
+    delay(500);
+  }
+
+  digitalWrite(LED_PIN, LOW);
+}
 
 void setup()
 {
   pinMode(RELAY_PIN, OUTPUT);
-  pinMode(21, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(RELAY_PIN, LOW);
+  digitalWrite(LED_PIN, LOW);
 
   if (!session_init())
   {
-    while (1)
-    {
-      digitalWrite(21, HIGH);
-      delay(200);
-      digitalWrite(21, LOW);
-      delay(200);
-    }
+    set_error(true);
   }
 }
 
 void loop()
 {
-  int req = session_request();
+  int request = session_request();
 
-  switch (req)
+  switch (request)
   {
   case SESSION_ESTABLISH:
-    session_establish();
+    request = session_establish();
     break;
 
   case SESSION_CLOSE:
-    session_close();
+    request = session_close();
     break;
 
   case SESSION_GET_TEMP:
-    session_send_temperature(temperatureRead());
+    request = session_send_temperature(temperatureRead());
     break;
 
   case SESSION_TOGGLE_RELAY:
@@ -43,22 +54,12 @@ void loop()
     static uint8_t state = LOW;
     state = (state == LOW) ? HIGH : LOW;
     digitalWrite(RELAY_PIN, state);
-    session_send_relay_state(state);
-    break;
+    request = (state == digitalRead(RELAY_PIN)) ? session_send_relay_state(state) : session_send_error();
   }
-
+  break;
   default:
     break;
   }
 
-  if (req == SESSION_ERROR)
-  {
-    while (1)
-    {
-      digitalWrite(21, HIGH);
-      delay(200);
-      digitalWrite(21, LOW);
-      delay(200);
-    }
-  }
+  set_error(request == SESSION_ERROR);
 }

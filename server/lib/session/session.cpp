@@ -311,7 +311,7 @@ int session_establish(void)
                     }
 
                     assert(0 == mbedtls_ctr_drbg_random(&ctr_drbg, enc_iv, sizeof(enc_iv)));
-                    memcpy(dec_iv, enc_iv, sizeof(dec_iv)); // enc_iv and dec_iv shall be the same
+                    memcpy(dec_iv, enc_iv, sizeof(dec_iv));
                     assert(0 == mbedtls_ctr_drbg_random(&ctr_drbg, aes_key, sizeof(aes_key)));
 
                     if (0 == mbedtls_aes_setkey_enc(&aes_ctx, aes_key, sizeof(aes_key) * CHAR_BIT))

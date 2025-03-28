@@ -31,7 +31,6 @@ class Session:
             raise Exception("1) Failed to exchange keys")
             
         buffer = self.__receive(2 * Session.__RSA_SIZE)
-        print("Received server key length:", len(buffer))
         if 0 == len(buffer):
             raise Exception("2) Failed to exchange keys")
         

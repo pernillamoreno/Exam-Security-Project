@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="hEeOqorTtUtQZ6ahrq-n" name="Page-1">
-        <mxGraphModel dx="3101" dy="1131" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="4206" dy="1592" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -432,7 +432,7 @@
                 <mxCell id="376" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;User interface&lt;br&gt;&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
                     <mxGeometry x="158" y="1995" width="158" height="1970" as="geometry"/>
                 </mxCell>
-                <mxCell id="424" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Display Temperatur&lt;/font&gt;e" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="376">
+                <mxCell id="424" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Display Temperatur&lt;/font&gt;e" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="376" edge="1">
                     <mxGeometry x="0.104" y="-10" width="160" relative="1" as="geometry">
                         <mxPoint x="338.5" y="505" as="sourcePoint"/>
                         <mxPoint x="-180.5" y="505" as="targetPoint"/>
@@ -448,14 +448,14 @@
                 <mxCell id="384" value="&lt;b&gt;Led and temperature&lt;br&gt;&lt;br&gt;&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;" parent="378" vertex="1">
                     <mxGeometry x="19" y="100" width="120" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="422" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Resevie Temperature&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="378" source="379">
+                <mxCell id="422" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Resevie Temperature&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="378" source="379" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="553.5" y="437" as="sourcePoint"/>
                         <mxPoint x="-176" y="437" as="targetPoint"/>
                         <mxPoint x="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="425" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Toggle Le&lt;/font&gt;d" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" edge="1" parent="378" target="381">
+                <mxCell id="425" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Toggle Le&lt;/font&gt;d" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" parent="378" target="381" edge="1">
                     <mxGeometry x="-0.056" y="10" width="160" relative="1" as="geometry">
                         <mxPoint x="-166" y="600" as="sourcePoint"/>
                         <mxPoint x="342.5" y="600" as="targetPoint"/>
@@ -465,7 +465,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="429" value="Receive Satus of Led" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="378" target="377">
+                <mxCell id="429" value="Receive Satus of Led" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="378" target="377" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="354.5" y="830" as="sourcePoint"/>
                         <mxPoint x="-126" y="830" as="targetPoint"/>
@@ -475,7 +475,7 @@
                 <mxCell id="379" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Client&lt;br&gt;Communication&lt;br&gt;&lt;/font&gt;" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;size=62;" parent="1" vertex="1">
                     <mxGeometry x="942" y="2000" width="158" height="1970" as="geometry"/>
                 </mxCell>
-                <mxCell id="428" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Send Staus of Led&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="379" target="379">
+                <mxCell id="428" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Send Staus of Led&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="379" target="379" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="559.5" y="780" as="sourcePoint"/>
                         <mxPoint x="-170" y="780" as="targetPoint"/>
@@ -525,40 +525,28 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="416" value="&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;25 Send authenticiation&amp;nbsp; token+ AES + hmac&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%33333442FmxGraphModel%3E&lt;/span&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
-                    <mxGeometry x="-0.5859" y="15" width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="1742.4499999999998" y="1793.036" as="sourcePoint"/>
-                        <mxPoint x="1743.3235294117649" y="1826" as="targetPoint"/>
-                        <Array as="points">
-                            <mxPoint x="1743" y="1790"/>
-                            <mxPoint x="1820" y="1790"/>
-                            <mxPoint x="1820" y="1826"/>
-                        </Array>
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="419" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Read Temperatur&lt;/font&gt;e" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="1">
+                <mxCell id="419" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Read Temperatur&lt;/font&gt;e" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="1" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="1738" y="2284" as="sourcePoint"/>
                         <mxPoint x="1972.5" y="2284" as="targetPoint"/>
                         <mxPoint x="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="420" value="Return Temperature" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="1">
+                <mxCell id="420" value="Return Temperature" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="1" edge="1">
                     <mxGeometry x="0.0122" width="160" relative="1" as="geometry">
                         <mxPoint x="1974.5" y="2340" as="sourcePoint"/>
                         <mxPoint x="1728.5" y="2340" as="targetPoint"/>
                         <mxPoint x="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="421" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Send Temperature&lt;/font&gt;&amp;nbsp;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="1" target="379">
+                <mxCell id="421" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Send Temperature&lt;/font&gt;&amp;nbsp;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="1" target="379" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="1738.5" y="2390" as="sourcePoint"/>
                         <mxPoint x="1323" y="2390" as="targetPoint"/>
                         <mxPoint x="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="426" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Toggle Le&lt;/font&gt;d" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" edge="1" parent="1">
+                <mxCell id="426" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Toggle Le&lt;/font&gt;d" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" parent="1" edge="1">
                     <mxGeometry x="-0.056" y="10" width="160" relative="1" as="geometry">
                         <mxPoint x="1500" y="2670" as="sourcePoint"/>
                         <mxPoint x="1970" y="2670" as="targetPoint"/>
@@ -568,7 +556,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="427" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Led Toggled&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" edge="1" parent="1" target="381">
+                <mxCell id="427" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Led Toggled&lt;/font&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;" parent="1" target="381" edge="1">
                     <mxGeometry x="0.1554" y="-10" width="160" relative="1" as="geometry">
                         <mxPoint x="1886.25" y="2730" as="sourcePoint"/>
                         <mxPoint x="1623.75" y="2730" as="targetPoint"/>
@@ -578,7 +566,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="430" value="Display Satus of Led" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" edge="1" parent="1">
+                <mxCell id="430" value="Display Satus of Led" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;fontSize=12;" parent="1" edge="1">
                     <mxGeometry x="0.0234" width="160" relative="1" as="geometry">
                         <mxPoint x="498.25" y="2900" as="sourcePoint"/>
                         <mxPoint x="-24.25" y="2900" as="targetPoint"/>

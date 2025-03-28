@@ -65,6 +65,8 @@ class ClientWindow(QMainWindow):
                 self.__log.append("Session Close: Done")
                 self.__temp_button.setDisabled(True)
                 self.__relay_button.setDisabled(True)
+                self.__session = Session(self.__session._Session__com._Communication__port,
+                                     self.__session._Session__com._Communication__speed)
             else:
                 self.__session_button.setText("Close Session")
                 self.__log.append("Session Close: Failed")

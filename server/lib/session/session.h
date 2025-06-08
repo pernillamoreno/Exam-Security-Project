@@ -14,13 +14,6 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include <mbedtls/md.h>
-#include <mbedtls/aes.h>
-#include <mbedtls/pk.h>
-#include <mbedtls/sha256.h>
-#include <mbedtls/ctr_drbg.h>
-#include <mbedtls/entropy.h>
-
 enum
 {
     SESSION_CLOSE,

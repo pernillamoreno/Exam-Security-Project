@@ -98,6 +98,8 @@ class ClientWindow(QMainWindow):
             self.__session_button.setText("Establish Session")
             self.__temp_button.setDisabled(True)
             self.__relay_button.setDisabled(True)
+            self.__session = Session(self.__session._Session__com._Communication__port,
+                                     self.__session._Session__com._Communication__speed)
         else:
             self.__log.append("Temperature: Error")
 
@@ -111,6 +113,8 @@ class ClientWindow(QMainWindow):
             self.__session_button.setText("Establish Session")
             self.__temp_button.setDisabled(True)
             self.__relay_button.setDisabled(True)
+            self.__session = Session(self.__session._Session__com._Communication__port,
+                                     self.__session._Session__com._Communication__speed)
         else:
             self.__log.append("Toggle Relay: Error")
 

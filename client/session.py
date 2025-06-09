@@ -78,16 +78,7 @@ class Session:
     def establish(self) -> bool:
         status = False
         self.__SESSION_ID = bytes(8 * [0])
-- __SESSION_ID: bytes
-- __com: Communication
-- __hmac: HMAC
-- __clientRSA: RSA
-- __serverRSA: RSA
-- __AES: AES
-- __RSA_SIZE: int
-- __EXPONENT: int
-- __SECRET_KEY: bytes
-- __TERMINATE: int
+        
         try:
             buffer = self.__clientRSA.sign(self.__SECRET_KEY, "SHA256")
             buffer = self.__serverRSA.encrypt(buffer[0:Session.__RSA_SIZE//2]) + self.__serverRSA.encrypt(buffer[Session.__RSA_SIZE//2:Session.__RSA_SIZE])

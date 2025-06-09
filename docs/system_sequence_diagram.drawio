@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="hEeOqorTtUtQZ6ahrq-n" name="Page-1">
-        <mxGraphModel dx="4206" dy="1592" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2958" dy="1219" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -25,7 +25,7 @@
                 <mxCell id="323" value="&lt;b&gt;EXAMPLE&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;" parent="319" vertex="1">
                     <mxGeometry x="10" y="70" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="324" value="22 Send authenticiation token + AES + hmac&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;br&gt;eeeeen&lt;br&gt;&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="319" source="345" edge="1">
+                <mxCell id="324" value="23 Send authenticiation token + AES + hmac&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;br&gt;eeeeen&lt;br&gt;&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="319" source="345" edge="1">
                     <mxGeometry x="-0.0513" y="10" width="160" relative="1" as="geometry">
                         <mxPoint x="-163.25" y="1649" as="sourcePoint"/>
                         <mxPoint x="337.26" y="1649" as="targetPoint"/>
@@ -49,7 +49,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="328" value="23 Send authenticiation token+ AES + hmac&amp;nbsp;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%333332FmxGrannnphModel%3E&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="325" edge="1">
+                <mxCell id="328" value="24 Send authenticiation token+ AES + hmac&amp;nbsp;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%333332FmxGrannnphModel%3E&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="325" edge="1">
                     <mxGeometry x="-0.0585" y="10" width="160" relative="1" as="geometry">
                         <mxPoint x="80" y="1680" as="sourcePoint"/>
                         <mxPoint x="319.5100000000002" y="1680" as="targetPoint"/>
@@ -79,7 +79,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="333" value="&lt;b&gt;15 Server sends encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="331" target="339" edge="1">
+                <mxCell id="333" value="&lt;b&gt;17 Server sends encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="331" target="339" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="-179" y="1288" as="sourcePoint"/>
                         <mxPoint x="288.5" y="1288.0593294137093" as="targetPoint"/>
@@ -127,19 +127,19 @@
                     <mxGeometry x="1660" y="29" width="150" height="1971" as="geometry"/>
                 </mxCell>
                 <mxCell id="340" value="&lt;b style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251);&quot;&gt;7 server generates a temporary RSA key pair.&amp;nbsp;&lt;br&gt;&lt;br&gt;&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="339" edge="1">
-                    <mxGeometry x="-0.5547" y="10" width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="79.99999999999982" y="824.0359999999998" as="sourcePoint"/>
-                        <mxPoint x="80.87352941176486" y="857" as="targetPoint"/>
+                    <mxGeometry x="-0.3479" y="22" width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="79.99999999999982" y="826.0359999999998" as="sourcePoint"/>
+                        <mxPoint x="80.87352941176486" y="859" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="80.55" y="821"/>
-                            <mxPoint x="157.55" y="821"/>
-                            <mxPoint x="157.55" y="857"/>
+                            <mxPoint x="80.55" y="823"/>
+                            <mxPoint x="157.55" y="823"/>
+                            <mxPoint x="157.55" y="859"/>
                         </Array>
-                        <mxPoint as="offset"/>
+                        <mxPoint x="-1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="341" value="&lt;b&gt;17 Server decrypts request and validates HMAC&lt;br&gt;decrypt the cyper&lt;br&gt;&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="339" edge="1">
-                    <mxGeometry x="-0.5905" y="15" width="50" height="50" relative="1" as="geometry">
+                <mxCell id="341" value="&lt;b&gt;16 Server decrypts request and validates HMAC&lt;br&gt;decrypt the cyper&lt;br&gt;&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="339" edge="1">
+                    <mxGeometry x="-0.4671" y="29" width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="71.44999999999982" y="1223.036" as="sourcePoint"/>
                         <mxPoint x="72.32352941176487" y="1256" as="targetPoint"/>
                         <Array as="points">
@@ -150,7 +150,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="342" value="24 Send authenticiation&amp;nbsp; token+ AES + hmac&amp;nbsp;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%33333442FmxGraphModel%3E&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="339" source="329" edge="1">
+                <mxCell id="342" value="25 Send authenticiation&amp;nbsp; token+ AES + hmac&amp;nbsp;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; font-weight: 400; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%33333442FmxGraphModel%3E&lt;/span&gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=block;endFill=1;fontStyle=1;" parent="339" source="329" edge="1">
                     <mxGeometry x="-0.0513" y="10" width="160" relative="1" as="geometry">
                         <mxPoint x="-160" y="1721" as="sourcePoint"/>
                         <mxPoint x="79.51000000000022" y="1721" as="targetPoint"/>
@@ -187,7 +187,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="348" value="&lt;b&gt;19 Client Decrypts Response and Validates HMAC&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="345" edge="1">
+                <mxCell id="348" value="&lt;b&gt;20 Client Decrypts Response and Validates HMAC&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="345" edge="1">
                     <mxGeometry x="-0.3113" y="8" width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="72.44999999999987" y="1441.036" as="sourcePoint"/>
                         <mxPoint x="73.32352941176492" y="1474" as="targetPoint"/>
@@ -199,7 +199,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="349" value="&lt;b&gt;20 Client decrypts response and validates HMAC&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="345" edge="1">
+                <mxCell id="349" value="&lt;b&gt;21 Client decrypts response and validates HMAC&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="345" edge="1">
                     <mxGeometry x="-0.569" y="11" width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="73.44999999999987" y="1502.036" as="sourcePoint"/>
                         <mxPoint x="74.32352941176492" y="1535" as="targetPoint"/>
@@ -339,7 +339,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="367" value="&lt;b&gt;17 Server sends encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="329" edge="1">
+                <mxCell id="367" value="&lt;b&gt;18 Server sends encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="329" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="1004.7500000000005" y="1385" as="sourcePoint"/>
                         <mxPoint x="1491.25" y="1385" as="targetPoint"/>
@@ -350,7 +350,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="368" value="&lt;b&gt;18 Client recives encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" edge="1">
+                <mxCell id="368" value="&lt;b&gt;19 Client recives encrypted confiramtion + HMAC&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="497.75" y="1420" as="sourcePoint"/>
                         <mxPoint x="1002.75" y="1420" as="targetPoint"/>
@@ -361,7 +361,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="369" value="&lt;b&gt;21 Client authentication&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="369" value="&lt;b&gt;22 Client authentication&lt;/b&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
                     <mxGeometry x="-0.573" y="11" width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="500.4499999999998" y="1608.036" as="sourcePoint"/>
                         <mxPoint x="501.32352941176487" y="1641" as="targetPoint"/>
@@ -373,7 +373,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="370" value="&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;25 Send authenticiation&amp;nbsp; token+ AES + hmac&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%33333442FmxGraphModel%3E&lt;/span&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+                <mxCell id="370" value="&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;26 Send authenticiation&amp;nbsp; token+ AES + hmac&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); background-color: rgb(251, 251, 251); color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%2222%20Send%20auth%22%20style%3D%22html%3D1%3BverticalAlign%3Dbottom%3BlabelBackgroundColor%3Dnone%3BendArrow%3Dblock%3BendFill%3D1%3BfontStyle%3D1%3B%22%20edge%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22-0.0513%22%20y%3D%2210%22%20width%3D%22160%22%20relative%3D%221%22%20as%3D%22geometry%22%3E%3CmxPoint%20x%3D%22487.75%22%20y%3D%221670%22%20as%3D%22sourcePoint%22%2F%3E%3CmxPoint%20x%3D%22988.2600000000002%22%20y%3D%221670%22%20as%3D%22targetPoint%22%2F%3E%3CmxPoint%20x%3D%22-1%22%20as%3D%22offset%22%2F%3E%3C%2FmxGeometry%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%33333442FmxGraphModel%3E&lt;/span&gt;" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;fontSize=12;exitX=0.523;exitY=0.848;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
                     <mxGeometry x="-0.5859" y="15" width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="1732.4499999999998" y="1783.036" as="sourcePoint"/>
                         <mxPoint x="1733.3235294117649" y="1816" as="targetPoint"/>
@@ -385,7 +385,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="371" value="&lt;b&gt;26 Server sends&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" edge="1">
+                <mxCell id="371" value="&lt;b&gt;27 Server sends&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="1249.5" y="1850" as="sourcePoint"/>
                         <mxPoint x="1730" y="1850" as="targetPoint"/>
@@ -396,7 +396,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="372" value="&lt;b&gt;27 send&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="329" edge="1">
+                <mxCell id="372" value="&lt;b&gt;28 send&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="329" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="1000.0000000000005" y="1884" as="sourcePoint"/>
                         <mxPoint x="1240" y="1884" as="targetPoint"/>
@@ -407,7 +407,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="373" value="&lt;b&gt;28 Client recives&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="325" edge="1">
+                <mxCell id="373" value="&lt;b&gt;29 Client recives&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 11px; font-weight: 700; background-color: rgb(251, 251, 251);&quot;&gt;authenticiation +AES+hmac&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" target="325" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="500" y="1900" as="sourcePoint"/>
                         <mxPoint x="747.5" y="1900" as="targetPoint"/>
@@ -418,7 +418,7 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="374" value="&lt;b&gt;29 Session establish&amp;nbsp;&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" source="337" edge="1">
+                <mxCell id="374" value="&lt;b&gt;30 Session establish&amp;nbsp;&lt;/b&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;elbow=vertical;startArrow=block;startFill=1;strokeColor=#545B64;rounded=0;fontSize=12;" parent="1" source="337" edge="1">
                     <mxGeometry y="13" width="100" relative="1" as="geometry">
                         <mxPoint x="240" y="1930" as="sourcePoint"/>
                         <mxPoint x="487.5" y="1930" as="targetPoint"/>
